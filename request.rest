@@ -1,0 +1,49 @@
+GET http://localhost:4000/auth/test/
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYwNGZjNDk5NzdhMmY4MjE2ODU4YTkzYSIsInVzZXJuYW1lIjoiZ2Fib3Rlc3QifSwiaWF0IjoxNjE2MDQ2MTc2LCJleHAiOjE2MTYwNDYyMzZ9.VenxqfneDq-pn39mU3_cdXwgVmvXehkSFuPuFwpAxXQ
+content-type: application/json
+
+###
+
+POST http://localhost:4000/auth/signup/
+content-type: application/json
+
+{
+  "username": "gabotest4",
+  "password": "gabogabo11"
+}
+
+
+###
+
+
+POST http://localhost:4000/auth/login/
+content-type: application/json
+
+{
+  "username": "gabotest",
+  "password": "gabogabo11"
+}
+
+
+###
+
+DELETE http://localhost:4000/auth/logout/
+content-type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYwNGZjNDk5NzdhMmY4MjE2ODU4YTkzYSIsInVzZXJuYW1lIjoiZ2Fib3Rlc3QifSwiaWF0IjoxNjE2MDQ2MzI3LCJleHAiOjE2MTYwNDY2Mjd9.-XHy6fK-kD3CbP4JygqsNfEOcWsQWoupP4kqufUJjXg"
+}
+
+###
+
+
+POST http://localhost:4000/auth/access_token/
+content-type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYwNTI0NjJiYTM0YjAwMTZlYzY1NjdjNSIsInVzZXJuYW1lIjoiZ2Fib3Rlc3Q0In0sImlhdCI6MTYxNjAwNDcwMiwiZXhwIjoxNjE2MDA1MDAyfQ.5I4R9Evq8OLoGRoXV8m2ON0xyYXIYS3U0shKm8_CXs8"
+}
+
+
+# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYwNDg4M2I5MTIyN2U0MTMwNDk3ZmZhMSIsInVzZXJuYW1lIjoiZ2FibyJ9LCJpYXQiOjE2MTYwMDE5MjYsImV4cCI6MTYxNjAwMjIyNn0.pdN0CppHpq72U8hGspevoEZmtOM32Tas1iAnyREqSXc
+# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYwNDg4M2I5MTIyN2U0MTMwNDk3ZmZhMSIsInVzZXJuYW1lIjoiZ2FibyJ9LCJpYXQiOjE2MTU5OTkyOTQsImV4cCI6MTYxNTk5OTQxNH0.4FbHHmVuqnMxjgAIs8BYQAR4d4r7p7f5wl4AOivLFb0
