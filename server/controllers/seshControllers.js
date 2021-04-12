@@ -17,7 +17,7 @@ const add = async (req, res) => {
       media: file ? changeFilePath(file.path) : null,
       author: req.user._id,
     }).save();
-    res.json({ sesh });
+    res.json(sesh);
   } catch (err) {
     res.status(500).json({ error: "Internal server error" });
   }

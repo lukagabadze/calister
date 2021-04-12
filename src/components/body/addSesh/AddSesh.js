@@ -30,9 +30,12 @@ function AddSesh(props) {
     try {
       const res = await api.addSesh(data);
       console.log("Sesh added successfully");
+
+      const sesh = res.data;
       setForm(initialForm);
       setFileUrl("");
       setNumberofSets(1);
+      props.setSeshes([sesh, ...props.seshes]);
     } catch (err) {
       console.log(err);
     }

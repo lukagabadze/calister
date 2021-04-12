@@ -2,31 +2,29 @@ import React, { useState, useEffect } from "react";
 import Sesh from "./sesh/Sesh";
 import api from "../../../api";
 
-function SeshList() {
-  const [seshes, setSeshes] = useState([]);
-
+function SeshList(props) {
   useEffect(async () => {
     try {
       const res = await api.getSeshes();
       const seshes = res.data.seshes;
-      setSeshes(seshes);
-      console.log(seshes);
+      props.setSeshes(seshes);
     } catch (err) {
       console.log(err);
     }
   }, []);
 
+  const seshes = props.seshes;
   let seshList = [];
-  for (let i = 0; i < seshes.length; i++) {
+  seshes.forEach((sesh) => {
     seshList.push(
       <Sesh
-        key={seshes[i]._id}
-        title={seshes[i].title}
-        sets={seshes[i].sets}
-        mediaUrl={seshes[i].media}
+        key={sesh._id}
+        title={sesh.title}
+        sets={sesh.sets}
+        mediaUrl={sesh.media}
       />
     );
-  }
+  });
 
   return <div className="w-full space-y-2">{seshList}</div>;
 }

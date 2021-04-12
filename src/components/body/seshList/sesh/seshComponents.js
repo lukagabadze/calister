@@ -29,7 +29,7 @@ export const Image = (props) => {
     <div className="m-2">
       <img
         className="rounded-xl border-2 border-gray-600"
-        src={`http://localhost:4000\\${props.mediaUrl}`}
+        src={`http://localhost:4000/${props.mediaUrl}`}
       />
     </div>
   );
