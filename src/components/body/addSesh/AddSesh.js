@@ -14,13 +14,11 @@ const initialForm = {
 function AddSesh(props) {
   const [form, setForm] = useState(initialForm);
   const [fileUrl, setFileUrl] = useState("");
-  const [numberOfSets, setNumberofSets] = useState(1);
 
   const formOnSubmitHandler = async (e) => {
     e.preventDefault();
 
     // error handling
-    // im too lazy
 
     let data = new FormData();
     data.append("title", form.title);
@@ -34,7 +32,6 @@ function AddSesh(props) {
       const sesh = res.data;
       setForm(initialForm);
       setFileUrl("");
-      setNumberofSets(1);
       props.setSeshes([sesh, ...props.seshes]);
     } catch (err) {
       console.log(err);
@@ -51,15 +48,18 @@ function AddSesh(props) {
         <div className="flex flex-row">
           <SetList
             sets={form.sets}
-            numberOfSets={numberOfSets}
             onChangeHandler={(setIndex, value) => {
               const sets = [...form.sets];
               sets[setIndex] = value;
               setForm({ ...form, sets });
             }}
-            addSeshHandler={(e) => {
-              e.preventDefault();
-              setNumberofSets(numberOfSets + 1);
+            addSeshHandler={() => {
+              setForm({ ...form, sets: [...form.sets, ""] });
+            }}
+            delSeshHandler={() => {
+              let sets = form.sets;
+              if (sets.length > 1) sets.pop();
+              setForm({ ...form, sets: sets });
             }}
           />
           <Image
