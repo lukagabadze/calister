@@ -1,10 +1,17 @@
 import React from "react";
-import { Input } from "./addSeshComponents";
+import { Input, Error } from "./addSeshComponents";
 
 function SetList(props) {
   const sets = props.sets;
+  const errors = props.errors;
+  let errorsInd = 0;
   let setsJSX = [];
   sets.forEach((set, ind) => {
+    let errorJSX = null;
+    if (errors[errorsInd] && errors[errorsInd].index === ind) {
+      errorJSX = <Error error={errors[errorsInd].message} />;
+      errorsInd++;
+    }
     setsJSX.push(
       <li className="px-2" key={ind}>
         <Input
@@ -12,20 +19,10 @@ function SetList(props) {
           onChangeHandler={(e) => props.onChangeHandler(ind, e.target.value)}
           value={props.set}
         />
+        {errorJSX}
       </li>
     );
   });
-  // for (let i = 0; i < props.numberOfSets; i++) {
-  // sets.push(
-  //   <li className="px-2" key={i}>
-  //     <Input
-  //       name={`Set ${i + 1}`}
-  //       onChangeHandler={(e) => props.onChangeHandler(i, e.target.value)}
-  //       value={props.sets[i]}
-  //     />
-  //   </li>
-  // );
-  // }
 
   return (
     <div className="flex-none w-9/12 border-r-2 border-gray-300">

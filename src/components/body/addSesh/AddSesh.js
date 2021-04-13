@@ -10,15 +10,54 @@ const initialForm = {
   sets: [""],
   file: null,
 };
+const initialErrors = {
+  title: "",
+  sets: [
+    {
+      index: 0,
+      message: "",
+    },
+  ],
+};
 
 function AddSesh(props) {
   const [form, setForm] = useState(initialForm);
   const [fileUrl, setFileUrl] = useState("");
+  const [errors, setErrors] = useState(initialErrors);
+
+  const errorHandler = ({ title, sets }) => {
+    let errorsTmp = null;
+    // title error handler
+    if (!title) {
+      errorsTmp = { title: "Title is required" };
+    }
+
+    // set error handler
+    let setsErrorArr = [];
+    sets.forEach(async (set, index) => {
+      if (set === "") {
+        const error = {
+          index,
+          message: "Set can't be empty",
+        };
+        setsErrorArr.push(error);
+      }
+    });
+    if (setsErrorArr.length !== 0)
+      errorsTmp = { ...errorsTmp, sets: setsErrorArr };
+
+    return errorsTmp;
+  };
 
   const formOnSubmitHandler = async (e) => {
     e.preventDefault();
+    setErrors(initialErrors);
 
-    // error handling
+    const errors = errorHandler({ title: form.title, sets: form.sets });
+    if (errors) {
+      setErrors(errors);
+      return;
+    }
 
     let data = new FormData();
     data.append("title", form.title);
@@ -44,21 +83,25 @@ function AddSesh(props) {
         <Title
           value={form.title}
           onChangeHandler={(e) => setForm({ ...form, title: e.target.value })}
+          error={errors.title}
         />
         <div className="flex flex-row">
           <SetList
             sets={form.sets}
+            errors={errors.sets}
             onChangeHandler={(setIndex, value) => {
               const sets = [...form.sets];
               sets[setIndex] = value;
               setForm({ ...form, sets });
             }}
             addSeshHandler={() => {
+              if (form.sets.length >= 15) return;
               setForm({ ...form, sets: [...form.sets, ""] });
             }}
             delSeshHandler={() => {
               let sets = form.sets;
-              if (sets.length > 1) sets.pop();
+              if (sets.length <= 1) return;
+              sets.pop();
               setForm({ ...form, sets: sets });
             }}
           />

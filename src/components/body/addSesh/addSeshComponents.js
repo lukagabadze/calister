@@ -1,4 +1,4 @@
-export function Input(props) {
+export const Input = (props) => {
   return (
     <input
       className="w-10/12 text-black no-underline m-2 border-2 border-gray-500 rounded"
@@ -8,9 +8,13 @@ export function Input(props) {
       onChange={props.onChangeHandler}
     />
   );
-}
+};
 
-export function PlusSvg(props) {
+export const Error = ({ error }) => {
+  return <div className="text-red-500">{error}</div>;
+};
+
+export const PlusSvg = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -27,4 +31,4 @@ export function PlusSvg(props) {
       />
     </svg>
   );
-}
+};
