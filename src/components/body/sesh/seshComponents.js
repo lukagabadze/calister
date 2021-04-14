@@ -1,35 +1,32 @@
-export const Title = (props) => {
-  return (
-    <div className="border-b-2 border-black text-lg p-2">{props.title}</div>
-  );
+export const Title = ({ title }) => {
+  return <div className="border-b-2 border-black text-lg p-2">{title}</div>;
 };
 
-export const Sets = (props) => {
-  let sets = [];
-  for (let i = 0; i < props.sets.length; i++) {
-    sets.push(
+export const Sets = ({ sets = [] }) => {
+  let setsJSX = [];
+  sets.forEach((set, ind) => {
+    setsJSX.push(
       <li
-        key={i}
+        key={ind}
         className="border-2 border-black px-2 py-1 rounded-md bg-gray-200 truncate"
       >
-        {props.sets[i]}
+        {set[ind]}
       </li>
     );
-  }
-
-  return sets;
+  });
+  return setsJSX;
 };
 
-export const Set = (props) => {
-  return <div>{props.setName}</div>;
+export const Set = ({ setName }) => {
+  return <div>{setName}</div>;
 };
 
-export const Image = (props) => {
+export const Image = ({ mediaUrl }) => {
   return (
     <div className="m-2">
       <img
         className="rounded-xl border-2 border-gray-600"
-        src={`http://localhost:4000/${props.mediaUrl}`}
+        src={`http://localhost:4000/${mediaUrl}`}
       />
     </div>
   );
