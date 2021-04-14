@@ -9,5 +9,6 @@ const upload = multer({ storage });
 
 router.post("/add", checkAuth, upload.single("file"), seshControllers.add);
 router.get("/seshes", seshControllers.seshes);
+router.get("/single", seshControllers.single);
 
 module.exports = router;

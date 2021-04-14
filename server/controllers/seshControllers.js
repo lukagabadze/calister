@@ -29,7 +29,15 @@ const seshes = async (req, res) => {
   return res.json({ seshes });
 };
 
+const single = async (req, res) => {
+  const { seshId } = req.body;
+  const sesh = await Sesh.find({ _id: seshId });
+  console.log(sesh);
+  return res.json(sesh);
+};
+
 module.exports = {
   add,
   seshes,
+  single,
 };

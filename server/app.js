@@ -26,14 +26,6 @@ app.use(express.static("./images"));
 app.use(cors());
 app.use(authMiddleware);
 
-// app.use((req, res, next) => {
-//   console.log(req.body);
-//   next();
-// });
-
 // routes
-app.get("/", (req, res) => {
-  res.download("./images/gabo/a.png");
-});
 app.use("/auth", authRoutes);
 app.use("/sesh", seshRoutes);
