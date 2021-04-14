@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Sesh from "./sesh/Sesh";
+import Sesh from "../sesh/Sesh";
 import api from "../../../api";
 
 function SeshList(props) {
