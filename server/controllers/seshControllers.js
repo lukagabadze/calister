@@ -25,14 +25,12 @@ const add = async (req, res) => {
 
 const seshes = async (req, res) => {
   const seshes = await Sesh.find({}).sort([["date", -1]]);
-  console.log(seshes);
   return res.json({ seshes });
 };
 
 const single = async (req, res) => {
-  const { seshId } = req.body;
-  const sesh = await Sesh.find({ _id: seshId });
-  console.log(sesh);
+  const { id } = req.params;
+  const sesh = await Sesh.findById(id);
   return res.json(sesh);
 };
 
