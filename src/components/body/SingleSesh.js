@@ -6,6 +6,7 @@ import Sesh from "./sesh/Sesh";
 function SingleSesh() {
   const { seshId } = useParams();
   const [singleSesh, setSingleSesh] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -13,6 +14,7 @@ function SingleSesh() {
       .then((res) => {
         const sesh = res.data;
         setSingleSesh(sesh);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -20,12 +22,16 @@ function SingleSesh() {
   }, []);
 
   return (
-    <div>
-      <Sesh
-        title={singleSesh.title}
-        sets={singleSesh.sets}
-        mediaUrl={singleSesh.media}
-      />
+    <div className="w-full">
+      {loading ? (
+        <p className="text-3xl text-center">Loading...</p>
+      ) : (
+        <Sesh
+          title={singleSesh.title}
+          sets={singleSesh.sets}
+          mediaUrl={singleSesh.media}
+        />
+      )}
     </div>
   );
 }

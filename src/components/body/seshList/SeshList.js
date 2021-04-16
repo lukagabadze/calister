@@ -18,14 +18,14 @@ function SeshList(props) {
   let seshList = [];
   seshes.forEach((sesh) => {
     seshList.push(
-      <Link to={`/sesh/${sesh._id}`}>
-        <Sesh
-          key={sesh._id}
-          title={sesh.title}
-          sets={sesh.sets}
-          mediaUrl={sesh.media}
-        />
-      </Link>
+      <div
+        key={sesh._id}
+        className="border-4 rounded-xl hover:border-black transition duration-100"
+      >
+        <Link to={`/sesh/${sesh._id}`}>
+          <Sesh title={sesh.title} sets={sesh.sets} mediaUrl={sesh.media} />
+        </Link>
+      </div>
     );
   });
 
