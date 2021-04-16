@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Sesh from "../sesh/Sesh";
 import api from "../../../api";
 
@@ -17,16 +18,18 @@ function SeshList(props) {
   let seshList = [];
   seshes.forEach((sesh) => {
     seshList.push(
-      <Sesh
-        key={sesh._id}
-        title={sesh.title}
-        sets={sesh.sets}
-        mediaUrl={sesh.media}
-      />
+      <Link to={`/sesh/${sesh._id}`}>
+        <Sesh
+          key={sesh._id}
+          title={sesh.title}
+          sets={sesh.sets}
+          mediaUrl={sesh.media}
+        />
+      </Link>
     );
   });
 
-  return <div className="w-full space-y-2">{seshList}</div>;
+  return <div className="flex flex-col space-y-4">{seshList}</div>;
 }
 
 export default SeshList;
