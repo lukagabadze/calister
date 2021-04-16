@@ -3,6 +3,7 @@ export const Title = ({ title }) => {
 };
 
 export const Sets = ({ sets = [] }) => {
+  console.log(sets);
   let setsJSX = [];
   sets.forEach((set, ind) => {
     setsJSX.push(
@@ -10,7 +11,7 @@ export const Sets = ({ sets = [] }) => {
         key={ind}
         className="border-2 border-black px-2 py-1 rounded-md bg-gray-200 truncate"
       >
-        {set[ind]}
+        {set}
       </li>
     );
   });
