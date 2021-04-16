@@ -19,8 +19,6 @@ function SingleSesh() {
       });
   }, []);
 
-  console.log(singleSesh);
-
   return (
     <div>
       <Sesh
