@@ -34,8 +34,20 @@ const single = async (req, res) => {
   return res.json(sesh);
 };
 
+const comment_add = async (req, res) => {
+  const { seshId, text } = req.body;
+  const authorId = req.user._id;
+
+  const sesh = await Sesh.findById(seshId);
+  sesh.comments.push({ text, authorId });
+  sesh.save();
+
+  return res.json(sesh);
+};
+
 module.exports = {
   add,
   seshes,
   single,
+  comment_add,
 };

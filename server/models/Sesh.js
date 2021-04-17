@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const commentSchema = require("./commentSchema");
 
 const seshSchema = new mongoose.Schema({
   title: {
@@ -24,6 +25,7 @@ const seshSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  comments: [commentSchema],
 });
 
 const Sesh = mongoose.model("sesh", seshSchema);
