@@ -1,4 +1,5 @@
 const Sesh = require("../models/Sesh");
+const User = require("../models/User");
 
 const add = async (req, res) => {
   const changeFilePath = (filePath) => {
@@ -36,10 +37,11 @@ const single = async (req, res) => {
 
 const comment_add = async (req, res) => {
   const { seshId, text } = req.body;
-  const authorId = req.user._id;
+  const { username, _id } = req.user;
+  const { media } = await User.findById(_id);
 
   const sesh = await Sesh.findById(seshId);
-  sesh.comments.push({ text, authorId });
+  sesh.comments.push({ text, username, media });
   sesh.save();
 
   return res.json(sesh);

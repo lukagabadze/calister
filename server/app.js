@@ -7,6 +7,7 @@ const cors = require("cors");
 const authMiddleware = require("./middleware/authMiddleware");
 const authRoutes = require("./routes/authRoutes");
 const seshRoutes = require("./routes/seshRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 mongoose.set("useCreateIndex", true);
 mongoose.connect(
@@ -29,3 +30,4 @@ app.use(authMiddleware);
 // routes
 app.use("/auth", authRoutes);
 app.use("/sesh", seshRoutes);
+app.use("/user", userRoutes);

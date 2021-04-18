@@ -7,7 +7,6 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    // unique: [true, "Username already exists"],
     maxLength: 20,
     minLength: [5, "to big bro"],
   },
@@ -18,6 +17,10 @@ const userSchema = new mongoose.Schema({
   date_created: {
     type: Date,
     default: Date.now(),
+  },
+  media: {
+    type: String,
+    default: "default.jpg",
   },
 });
 
