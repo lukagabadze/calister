@@ -21,12 +21,12 @@ export const Set = ({ setName }) => {
   return <div>{setName}</div>;
 };
 
-export const Image = ({ mediaUrl }) => {
+export const Image = ({ media }) => {
   return (
     <div className="m-2">
       <img
         className="rounded-xl border-2 border-gray-600"
-        src={`http://localhost:4000/${mediaUrl}`}
+        src={`http://localhost:4000/${media}`}
       />
     </div>
   );

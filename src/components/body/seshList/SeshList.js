@@ -23,20 +23,13 @@ function SeshList(props) {
         className="w-full border-4 rounded-xl hover:border-black transition duration-100"
       >
         <Link to={`/sesh/${sesh._id}`}>
-          <Sesh
-            id={sesh._id}
-            title={sesh.title}
-            sets={sesh.sets}
-            mediaUrl={sesh.media}
-            comments={sesh.comments}
-          />
+          <Sesh sesh={sesh} />
         </Link>
       </div>
     );
   });
 
   return seshList;
-  // return <div className="flex flex-col space-y-4">{seshList}</div>;
 }
 
 export default SeshList;
