@@ -27,9 +27,11 @@ function SingleSesh() {
         <p className="text-3xl text-center">Loading...</p>
       ) : (
         <Sesh
+          id={singleSesh._id}
           title={singleSesh.title}
           sets={singleSesh.sets}
           mediaUrl={singleSesh.media}
+          comments={singleSesh.comments}
         />
       )}
     </div>

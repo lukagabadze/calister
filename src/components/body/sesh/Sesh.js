@@ -1,9 +1,10 @@
 import React from "react";
+import Comments from "./comments/Comments";
 import { Title, Sets, Image } from "./seshComponents";
 
-function Sesh({ title, sets, mediaUrl }) {
+function Sesh({ id, title, sets, mediaUrl, comments }) {
   return (
-    <div className="flex flex-col border-2 border-gray-500 bg-gray-300 rounded-lg">
+    <div className="flex flex-col border-2 border-gray-500 bg-gray-200 rounded-lg">
       <Title title={title} />
       <div className="flex">
         <ul className="w-full space-y-3 p-2 list-disc list-inside">
@@ -14,6 +15,9 @@ function Sesh({ title, sets, mediaUrl }) {
             <Image mediaUrl={mediaUrl} />
           </div>
         ) : null}
+      </div>
+      <div className="border-t-2 border-black">
+        <Comments comments={comments} seshId={id} />
       </div>
     </div>
   );

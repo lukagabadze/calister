@@ -3,13 +3,12 @@ export const Title = ({ title }) => {
 };
 
 export const Sets = ({ sets = [] }) => {
-  console.log(sets);
   let setsJSX = [];
   sets.forEach((set, ind) => {
     setsJSX.push(
       <li
         key={ind}
-        className="border-2 border-black px-2 py-1 rounded-md bg-gray-200 truncate"
+        className="border-2 border-black px-2 py-1 rounded-md bg-gray-100 truncate"
       >
         {set}
       </li>
@@ -30,5 +29,15 @@ export const Image = ({ mediaUrl }) => {
         src={`http://localhost:4000/${mediaUrl}`}
       />
     </div>
+  );
+};
+
+export const Logo = ({ mediaUrl = "default.jpg" }) => {
+  return (
+    <img
+      src={`http://localhost:4000/${mediaUrl}`}
+      alt=""
+      className="w-8 h-8 rounded-full"
+    />
   );
 };
