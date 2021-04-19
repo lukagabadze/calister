@@ -16,7 +16,7 @@ const add = async (req, res) => {
       title,
       sets: setsArray,
       media: file ? changeFilePath(file.path) : null,
-      author: req.user._id,
+      authorId: req.user._id,
     }).save();
     res.json(sesh);
   } catch (err) {
@@ -47,9 +47,26 @@ const comment_add = async (req, res) => {
   return res.json(sesh);
 };
 
+const heart = async (req, res) => {
+  const { seshId } = req.body;
+  const { _id } = req.user;
+  const sesh = await Sesh.findById(seshId);
+  if (sesh.hearts.includes(_id)) {
+    // already liked
+    const idInd = sesh.hearts.indexOf(_id);
+    sesh.hearts.splice(idInd, 1);
+  } else {
+    // not liked yet
+    sesh.hearts.push(_id);
+  }
+  sesh.save();
+  return res.status(201).json({ hearts: sesh.hearts });
+};
+
 module.exports = {
   add,
   seshes,
   single,
   comment_add,
+  heart,
 };

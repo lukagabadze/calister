@@ -21,10 +21,11 @@ const seshSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  author: {
+  authorId: {
     type: String,
     required: true,
   },
+  hearts: [String],
   comments: [commentSchema],
 });
 
