@@ -3,7 +3,7 @@ import Comments from "./comments/Comments";
 import { Title, Sets, Image } from "./seshComponents";
 
 function Sesh({ sesh }) {
-  const { id, title, sets, media, comments } = sesh;
+  const { _id, title, sets, media, comments } = sesh;
 
   return (
     <div className="flex flex-col border-2 border-gray-500 bg-gray-200 rounded-lg">
@@ -19,7 +19,7 @@ function Sesh({ sesh }) {
         ) : null}
       </div>
       <div className="border-t-2 border-black">
-        <Comments comments={comments} seshId={id} />
+        <Comments comments={comments} seshId={_id} />
       </div>
     </div>
   );
