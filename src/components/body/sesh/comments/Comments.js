@@ -6,6 +6,7 @@ import { Logo } from "../seshComponents";
 
 function Comments(props) {
   const { seshId } = props;
+  const { user } = props;
   const [comments, setComments] = useState(props.comments);
 
   let commentsJSX = [];
@@ -17,7 +18,8 @@ function Comments(props) {
 
   return (
     <div className="bg-gray-300 p-2 flex flex-col space-y-2">
-      {commentsJSX} <CommentAdd seshId={seshId} setComments={setComments} />
+      {commentsJSX}
+      {user ? <CommentAdd seshId={seshId} setComments={setComments} /> : null}
     </div>
   );
 }

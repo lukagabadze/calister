@@ -9,13 +9,15 @@ function Sesh({ sesh }) {
   const [hearted, setHearted] = useState(false);
 
   useEffect(() => {
-    setHearted(hearts.indexOf(user._id) !== -1);
+    setHearted(user ? hearts.indexOf(user._id) !== -1 : false);
   }, [hearts]);
 
   return (
     <div className="flex flex-col border-2 border-gray-500 bg-gray-200 rounded-lg">
       <div className="flex border-b-2 border-black">
-        <Heart seshId={_id} hearted={hearted} setHearted={setHearted} />
+        {user ? (
+          <Heart seshId={_id} hearted={hearted} setHearted={setHearted} />
+        ) : null}
         <Title title={title} />
       </div>
       <div className="flex">
@@ -29,7 +31,7 @@ function Sesh({ sesh }) {
         ) : null}
       </div>
       <div className="border-t-2 border-black">
-        <Comments comments={comments} seshId={_id} />
+        <Comments comments={comments} seshId={_id} user={user} />
       </div>
     </div>
   );
