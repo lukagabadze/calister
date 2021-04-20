@@ -59,7 +59,7 @@ const heart = async (req, res) => {
     // not liked yet
     sesh.hearts.push(_id);
   }
-  sesh.save();
+  await sesh.save();
   return res.status(201).json({ hearts: sesh.hearts });
 };
 
