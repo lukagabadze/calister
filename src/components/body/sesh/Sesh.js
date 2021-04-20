@@ -6,12 +6,9 @@ import { Title, Sets, Image, Heart } from "./seshComponents";
 function Sesh({ sesh }) {
   const { _id, title, sets, media, comments, hearts } = sesh;
   const user = useSelector((state) => state.user);
-  const [hearted, setHearted] = useState(false);
-
-  useEffect(() => {
-    const alreadyHearted = hearts.includes(user._id);
-    setHearted(alreadyHearted);
-  }, []);
+  const [hearted, setHearted] = useState(
+    !user ? null : hearts.includes(user._id)
+  );
 
   return (
     <div className="flex flex-col border-2 border-gray-500 bg-gray-200 rounded-lg">
