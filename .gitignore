@@ -31,3 +31,6 @@ yarn-error.log*
 
 #env
 /server/.env
+
+#images
+/server/images/*
