@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import AddSesh from "./addSesh/AddSesh";
 import SeshList from "./seshList/SeshList";
 import SingleSesh from "./SingleSesh";
+import Profile from "./profile/Profile";
 
 function MainFeed() {
   const [seshes, setSeshes] = useState([]);
@@ -14,8 +15,11 @@ function MainFeed() {
           <AddSesh seshes={seshes} setSeshes={setSeshes} />
           <SeshList seshes={seshes} setSeshes={setSeshes} />
         </Route>
-        <Route path="/sesh/:seshId">
+        <Route path="/sesh/:seshId" exact>
           <SingleSesh />
+        </Route>
+        <Route path="/profile/:userId" exact>
+          <Profile />
         </Route>
       </Switch>
     </div>
