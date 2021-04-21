@@ -24,9 +24,11 @@ function Profile() {
   }, []);
 
   return (
-    <div className="w-full bg-gray-100 rounded-2xl border-2 border-gray-200 p-2">
+    <div className="flex w-full bg-gray-100 rounded-2xl border-2 border-gray-200 p-2">
       <div className="flex space-x-6">
-        <ProfileImage mediaUrl={user.media} />
+        <div className="flex-none">
+          <ProfileImage mediaUrl={user.media} />
+        </div>
         <div className="flex flex-col space-y-3">
           <Username username={user.username} />
           <Followers followers={421} following={94} />
