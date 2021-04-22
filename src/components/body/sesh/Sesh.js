@@ -4,7 +4,7 @@ import Comments from "./comments/Comments";
 import { Title, Sets, Image, Heart } from "./seshComponents";
 
 function Sesh({ sesh }) {
-  const { _id, title, sets, media, comments, hearts } = sesh;
+  const { _id, title, sets, media, comments, hearts, author } = sesh;
   const user = useSelector((state) => state.user);
   const [hearted, setHearted] = useState(false);
 
@@ -14,11 +14,13 @@ function Sesh({ sesh }) {
 
   return (
     <div className="flex flex-col border-2 border-gray-500 bg-gray-200 rounded-lg">
-      <div className="flex border-b-2 border-black">
-        {user ? (
-          <Heart seshId={_id} hearted={hearted} setHearted={setHearted} />
-        ) : null}
-        <Title title={title} />
+      <div className="flex justify-between space-x-2 border-b-2 border-black">
+        <Title title={title} author={author} />
+        <div className="flex-end">
+          {user ? (
+            <Heart seshId={_id} hearted={hearted} setHearted={setHearted} />
+          ) : null}
+        </div>
       </div>
       <div className="flex">
         <ul className="w-full space-y-3 p-2 list-disc list-inside">

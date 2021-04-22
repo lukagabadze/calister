@@ -22,9 +22,9 @@ function SeshList(props) {
         key={sesh._id}
         className="w-full border-4 rounded-xl hover:border-black transition duration-100"
       >
-        <Link to={`/sesh/${sesh._id}`}>
-          <Sesh sesh={sesh} />
-        </Link>
+        {/* <Link to={`/sesh/${sesh._id}`}> */}
+        <Sesh sesh={sesh} />
+        {/* </Link> */}
       </div>
     );
   });
