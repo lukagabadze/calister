@@ -22,6 +22,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "default.jpg",
   },
+  description: {
+    type: String,
+    default:
+      "მე ვუსმენ ყველას, წარმოვიდგენ ცხოვრებას მისას,ცოცხლდება ჩემ წინ მკრთალი სახე ფერების მგოსნის,მთვარეულივით დავემხობი თბილისის მიწას და დიდი ნიკო ფიროსმანის ნატერფალს ვკოცნი!",
+  },
 });
 
 userSchema.methods = {

@@ -16,7 +16,7 @@ const add = async (req, res) => {
       title,
       sets: setsArray,
       media: file ? changeFilePath(file.path) : null,
-      authorId: req.user._id,
+      author: req.user._id,
     }).save();
     res.json(sesh);
   } catch (err) {
@@ -25,7 +25,10 @@ const add = async (req, res) => {
 };
 
 const seshes = async (req, res) => {
-  const seshes = await Sesh.find({}).sort([["date", -1]]);
+  const seshes = await Sesh.find({})
+    .sort([["date", -1]])
+    .populate("author")
+    .populate("comments.author");
   return res.json({ seshes });
 };
 
@@ -37,11 +40,11 @@ const single = async (req, res) => {
 
 const comment_add = async (req, res) => {
   const { seshId, text } = req.body;
-  const { username, _id } = req.user;
+  const { _id } = req.user;
   const { media } = await User.findById(_id);
 
   const sesh = await Sesh.findById(seshId);
-  sesh.comments.push({ text, username, media });
+  sesh.comments.push({ text, author: _id });
   sesh.save();
 
   return res.json(sesh);

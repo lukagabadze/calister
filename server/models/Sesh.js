@@ -21,9 +21,9 @@ const seshSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  authorId: {
-    type: String,
-    required: true,
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
   },
   hearts: [String],
   comments: [commentSchema],
