@@ -10,16 +10,27 @@ function Comments(props) {
   const [comments, setComments] = useState(props.comments);
 
   let commentsJSX = [];
-  comments.forEach(({ _id, text, username, media }) => {
+  comments.forEach(({ _id, text, author }) => {
     commentsJSX.push(
-      <Comment key={_id} text={text} username={username} media={media} />
+      <Comment
+        key={_id}
+        text={text}
+        username={author.username}
+        media={author.media}
+      />
     );
   });
 
   return (
     <div className="bg-gray-300 p-2 flex flex-col space-y-2">
       {commentsJSX}
-      {user ? <CommentAdd seshId={seshId} setComments={setComments} /> : null}
+      {user ? (
+        <CommentAdd
+          seshId={seshId}
+          comments={comments}
+          setComments={setComments}
+        />
+      ) : null}
     </div>
   );
 }

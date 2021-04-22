@@ -34,20 +34,27 @@ const seshes = async (req, res) => {
 
 const single = async (req, res) => {
   const { id } = req.params;
-  const sesh = await Sesh.findById(id);
+  const sesh = await Sesh.findById(id)
+    .populate("author")
+    .populate("comments.author");
   return res.json(sesh);
 };
 
 const comment_add = async (req, res) => {
   const { seshId, text } = req.body;
   const { _id } = req.user;
-  const { media } = await User.findById(_id);
 
+  const author = await User.findById(_id);
   const sesh = await Sesh.findById(seshId);
-  sesh.comments.push({ text, author: _id });
-  sesh.save();
+  const newComment = {
+    text,
+    author,
+  };
 
-  return res.json(sesh);
+  sesh.comments.push(newComment);
+  await sesh.save();
+
+  return res.json(newComment);
 };
 
 const heart = async (req, res) => {

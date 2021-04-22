@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Logo } from "../seshComponents";
 
-function CommentAdd({ seshId, setComments }) {
+function CommentAdd({ seshId, comments, setComments }) {
   const [commentForm, setCommentForm] = useState("");
 
   const commentFormSubmitHandler = async (e, comment) => {
@@ -16,8 +16,10 @@ function CommentAdd({ seshId, setComments }) {
         "http://localhost:4000/sesh/comment-add",
         body
       );
-      const newComments = res.data.comments;
-      setComments(newComments);
+      const newComment = res.data;
+      let commentsTmp = [...comments];
+      commentsTmp.push(newComment);
+      setComments(commentsTmp);
       setCommentForm("");
     } catch (err) {
       console.log(err);
