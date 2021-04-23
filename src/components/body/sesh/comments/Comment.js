@@ -1,13 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Logo } from "../seshComponents";
 
-function Comments({ text, username, media }) {
+function Comments({ text, username, media, authorId }) {
   return (
     <div className="flex space-x-1">
-      <Logo mediaUrl={media} />
+      <Link to={`/profile/${authorId}`}>
+        <Logo mediaUrl={media} />
+      </Link>
       <div className="bg-gray-400 p-1 border-2 border-black rounded-xl">
         <div>
-          <div className="text-xs text-white">{username}</div>
+          <Link to={`/profile/${authorId}`}>
+            <div className="text-xs underline text-white">{username}</div>
+          </Link>
           <div className="text-sm">{text}</div>
         </div>
       </div>

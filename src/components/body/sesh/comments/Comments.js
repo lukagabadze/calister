@@ -17,6 +17,7 @@ function Comments(props) {
         text={text}
         username={author.username}
         media={author.media}
+        authorId={author._id}
       />
     );
   });
