@@ -12,11 +12,12 @@ const add = async (req, res) => {
   const file = req.file;
   try {
     const setsArray = JSON.parse(sets);
+    const author = await User.findById(req.user._id);
     const sesh = await new Sesh({
       title,
       sets: setsArray,
       media: file ? changeFilePath(file.path) : null,
-      author: req.user._id,
+      author: author,
     }).save();
     res.json(sesh);
   } catch (err) {
