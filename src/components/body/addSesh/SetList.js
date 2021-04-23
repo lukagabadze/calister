@@ -3,7 +3,7 @@ import { Input, Error } from "./addSeshComponents";
 
 function SetList(props) {
   const sets = props.sets;
-  const errors = props.errors;
+  const errors = props.errors || [];
   let errorsInd = 0;
   let setsJSX = [];
   sets.forEach((set, ind) => {
