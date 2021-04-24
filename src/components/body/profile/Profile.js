@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import FollowButton from "./FollowButton";
 import ProfileImage from "./ProfileImage";
 import Username from "./Username";
 import Followers from "./Followers";
-import FollowButton from "./FollowButton";
 import Description from "./Description";
 import ProfileSeshes from "./ProfileSeshes";
 
 function Profile() {
   const { userId } = useParams();
+  const author = useSelector((state) => state.user);
   const [user, setUser] = useState({});
+  const [followed, setFollowed] = useState(false);
 
   useEffect(async () => {
     try {
@@ -24,6 +27,15 @@ function Profile() {
     }
   }, [userId]);
 
+  useEffect(() => {
+    console.log(user);
+    setFollowed(
+      Object.entries(user).length !== 0 && author
+        ? user.followers.indexOf(author._id) !== -1
+        : false
+    );
+  }, [user, author]);
+
   return (
     <div className="flex flex-col space-y-20">
       <div className="flex w-full bg-gray-100 rounded-2xl border-2 border-gray-200 p-2">
@@ -33,8 +45,8 @@ function Profile() {
           </div>
           <div className="flex flex-col space-y-3">
             <Username username={user.username} />
-            <Followers followers={421} following={94} />
-            <FollowButton userId={userId} />
+            <Followers followers={user.followers} following={user.following} />
+            <FollowButton followed={followed} user={user} setUser={setUser} />
             <Description description={user.description} />
           </div>
         </div>
