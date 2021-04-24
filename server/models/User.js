@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     maxLength: 20,
-    minLength: [5, "to big bro"],
+    minLength: 4,
   },
   password: {
     type: String,
@@ -27,6 +27,8 @@ const userSchema = new mongoose.Schema({
     default:
       "მე ვუსმენ ყველას, წარმოვიდგენ ცხოვრებას მისას,ცოცხლდება ჩემ წინ მკრთალი სახე ფერების მგოსნის,მთვარეულივით დავემხობი თბილისის მიწას და დიდი ნიკო ფიროსმანის ნატერფალს ვკოცნი!",
   },
+  followers: [{ type: mongoose.Schema.Types.ObjectId, default: 0 }],
+  following: [{ type: mongoose.Schema.Types.ObjectId, default: 0 }],
 });
 
 userSchema.methods = {
