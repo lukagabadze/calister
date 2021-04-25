@@ -5,7 +5,7 @@ const acceptedTypes = ["image/png", "image/jpg", "image/jpeg"];
 
 function Image(props) {
   return (
-    <div className="relative flex-grow flex items-center justify-center m-2 cursor-pointer border-2 border-dashed border-black hover:opacity-60 hover:border-gray-400 hover:text-white bg-gray-300 hover:bg-gray-500 duration-200">
+    <div className="flex-grow flex items-center justify-center m-2 cursor-pointer border-2 border-dashed border-black hover:opacity-60 hover:border-gray-400 hover:text-white bg-gray-300 hover:bg-gray-500 duration-200">
       <label
         htmlFor="file"
         className="flex justify-center items-center h-full w-full cursor-pointer p-1"

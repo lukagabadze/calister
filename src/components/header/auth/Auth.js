@@ -25,7 +25,7 @@ function Auth() {
   if (user !== null) {
     content = (
       <div className="flex items-center space-x-3 mr-12">
-        <p className="text-xl">Hello, {user.username}</p>
+        <p className="text-xl text-white">Hello, {user.username}</p>
         <Logout />
       </div>
     );
