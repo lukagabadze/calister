@@ -28,7 +28,6 @@ function Profile() {
   }, [userId]);
 
   useEffect(() => {
-    console.log(user);
     setFollowed(
       Object.entries(user).length !== 0 && author
         ? user.followers.indexOf(author._id) !== -1

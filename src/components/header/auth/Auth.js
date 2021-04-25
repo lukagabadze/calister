@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Login from "./Login";
 import Signup from "./Signup";
 import Logout from "./Logout";
+import { SettingsLink } from "./AuthComponents";
 import { useSelector } from "react-redux";
 
 function Auth() {
@@ -26,6 +27,7 @@ function Auth() {
     content = (
       <div className="flex items-center space-x-3 mr-12">
         <p className="text-xl text-white">Hello, {user.username}</p>
+        <SettingsLink />
         <Logout />
       </div>
     );

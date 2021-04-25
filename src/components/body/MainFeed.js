@@ -4,6 +4,7 @@ import AddSesh from "./addSesh/AddSesh";
 import SeshList from "./seshList/SeshList";
 import SingleSesh from "./SingleSesh";
 import Profile from "./profile/Profile";
+import Settings from "./settings/Settings";
 
 function MainFeed() {
   const [seshes, setSeshes] = useState([]);
@@ -20,6 +21,9 @@ function MainFeed() {
         </Route>
         <Route path="/profile/:userId" exact>
           <Profile />
+        </Route>
+        <Route path="/settings">
+          <Settings />
         </Route>
       </Switch>
     </div>
