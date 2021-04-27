@@ -88,9 +88,20 @@ const logout = async (req, res) => {
   }
 };
 
+const getUser = async (req, res) => {
+  const userId = req.user;
+  try {
+    const user = await User.findById(userId);
+    return res.status(200).json(user);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   signup,
   login,
   logout,
   generateAccessToken,
+  getUser,
 };

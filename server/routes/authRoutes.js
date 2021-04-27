@@ -8,15 +8,6 @@ router.post("/login", authControllers.login);
 router.delete("/logout", authControllers.logout);
 router.post("/access_token", authControllers.generateAccessToken);
 
-router.get("/user", checkAuth, (req, res) => {
-  console.log(req.user);
-  res.json(req.user);
-});
-
-// test route
-router.get("/test", checkAuth, async (req, res) => {
-  console.log(req.user);
-  res.send("gabos playgroud");
-});
+router.get("/user", checkAuth, authControllers.getUser);
 
 module.exports = router;
