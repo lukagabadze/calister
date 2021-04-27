@@ -47,10 +47,37 @@ function ProfileSettings() {
       ? false
       : true;
 
+  const formSubmitHandler = async (e) => {
+    e.preventDefault();
+    if (!formChanged) return;
+
+    const { username, file, description } = form;
+    const data = new FormData();
+    data.append("username", username);
+    data.append("file", file);
+    data.append("description", description);
+    try {
+      const res = await axios.post(`http://localhost:4000/user/edit`, data);
+      const newUser = res.data;
+      setUser(newUser);
+      setForm({
+        username: newUser.username,
+        file: null,
+        description: newUser.description,
+        mediaUrl: `http://localhost:4000/${newUser.media}`,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="w-full h-full p-2">
       {userId ? (
-        <form className="flex flex-col space-y-5 justify-between space-y-6">
+        <form
+          className="flex flex-col space-y-5 justify-between space-y-6"
+          onSubmit={formSubmitHandler}
+        >
           <UsernameSettings
             username={form.username}
             setFormHandler={(e) =>
