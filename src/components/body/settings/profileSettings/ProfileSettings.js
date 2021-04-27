@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUser } from "../../../../redux/index";
 import UsernameSettings from "./UsernameSettings";
 import ProfileImageSettings from "./ProfileImageSettings";
 import DescriptionSettings from "./DescriptionSettings";
@@ -14,33 +15,24 @@ const initialForm = {
 };
 
 function ProfileSettings() {
-  const userId = useSelector((state) => (state.user ? state.user._id : null));
-  const [user, setUser] = useState({});
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
   const [form, setForm] = useState(initialForm);
 
   useEffect(async () => {
-    if (!userId) {
-      setUser({});
+    if (!user) {
       return;
     }
-    try {
-      const res = await axios.get(
-        `http://localhost:4000/user/single/${userId}`
-      );
-      const user = res.data;
-      setUser(user);
-      setForm({
-        username: user.username,
-        mediaUrl: `http://localhost:4000/${user.media}`,
-        description: user.description,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  }, [userId]);
+    setForm({
+      username: user.username,
+      mediaUrl: `http://localhost:4000/${user.media}`,
+      description: user.description,
+    });
+  }, [user]);
 
-  const originalMediaUrl = `http://localhost:4000/${user.media}`;
+  const originalMediaUrl = user ? `http://localhost:4000/${user.media}` : null;
   const formChanged =
+    user &&
     user.username === form.username &&
     !form.file &&
     user.description === form.description
@@ -59,13 +51,13 @@ function ProfileSettings() {
     try {
       const res = await axios.post(`http://localhost:4000/user/edit`, data);
       const newUser = res.data;
-      setUser(newUser);
       setForm({
         username: newUser.username,
         file: null,
         description: newUser.description,
         mediaUrl: `http://localhost:4000/${newUser.media}`,
       });
+      dispatch(fetchUser());
     } catch (err) {
       console.log(err);
     }
@@ -73,7 +65,7 @@ function ProfileSettings() {
 
   return (
     <div className="w-full h-full p-2">
-      {userId ? (
+      {user ? (
         <form
           className="flex flex-col space-y-5 justify-between space-y-6"
           onSubmit={formSubmitHandler}
