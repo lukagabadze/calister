@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, NavLink } from "react-router-dom";
-import ProfileSettings from "./ProfileSettings";
+import ProfileSettings from "./profileSettings/ProfileSettings";
 
 function Settings() {
   const activeClass =
