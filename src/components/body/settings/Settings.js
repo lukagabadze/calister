@@ -1,8 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Route, NavLink } from "react-router-dom";
 import ProfileSettings from "./profileSettings/ProfileSettings";
 
 function Settings() {
+  const user = useSelector((state) => state.user);
+
   const activeClass =
     "border-r-2 border-black font-bold bg-gray-300 outline-none";
 
@@ -13,22 +16,29 @@ function Settings() {
           Profile
         </NavLink>
         <NavLink to="/settings/security" activeClassName={activeClass}>
-          Security
+          Account
         </NavLink>
         <NavLink to="/settings/other" activeClassName={activeClass}>
           Other...
         </NavLink>
       </div>
-      <div>
-        <Route path="/settings/profile" exact>
-          <ProfileSettings />
-        </Route>
-        <Route path="/settings/security" exact>
-          Not yet...
-        </Route>
-        <Route path="/settings/other" exact>
-          Not yet...
-        </Route>
+
+      <div className="p-2">
+        {user ? (
+          <div>
+            <Route path="/settings/profile" exact>
+              <ProfileSettings user={user} />
+            </Route>
+            <Route path="/settings/security" exact>
+              Not yet...
+            </Route>
+            <Route path="/settings/other" exact>
+              Not yet...
+            </Route>
+          </div>
+        ) : (
+          <p>Please login to use settings</p>
+        )}
       </div>
     </div>
   );

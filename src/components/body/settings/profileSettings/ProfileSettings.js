@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchUser } from "../../../../redux/index";
 import UsernameSettings from "./UsernameSettings";
 import ProfileImageSettings from "./ProfileImageSettings";
@@ -14,9 +14,9 @@ const initialForm = {
   mediaUrl: "",
 };
 
-function ProfileSettings() {
+function ProfileSettings(props) {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = props.user;
   const [form, setForm] = useState(initialForm);
 
   useEffect(async () => {
@@ -64,42 +64,34 @@ function ProfileSettings() {
   };
 
   return (
-    <div className="w-full h-full p-2">
-      {user ? (
-        <form
-          className="flex flex-col space-y-5 justify-between space-y-6"
-          onSubmit={formSubmitHandler}
-        >
-          <UsernameSettings
-            username={form.username}
-            setFormHandler={(e) =>
-              setForm({ ...form, username: e.target.value })
-            }
-          />
-          <ProfileImageSettings
-            mediaUrl={form.mediaUrl}
-            originalMediaUrl={originalMediaUrl}
-            revertImage={() =>
-              setForm({ ...form, file: null, mediaUrl: originalMediaUrl })
-            }
-            onChangeHandler={(e) => {
-              const file = e.target.files[0];
-              const mediaUrl = URL.createObjectURL(file);
-              setForm({ ...form, file, mediaUrl });
-            }}
-          />
-          <DescriptionSettings
-            description={form.description}
-            onChangeHandler={(e) =>
-              setForm({ ...form, description: e.target.value })
-            }
-          />
-          <SubmitButton formChanged={formChanged} />
-        </form>
-      ) : (
-        <div>Please login to use settings</div>
-      )}
-    </div>
+    <form
+      className="flex flex-col space-y-5 justify-between space-y-6"
+      onSubmit={formSubmitHandler}
+    >
+      <UsernameSettings
+        username={form.username}
+        setFormHandler={(e) => setForm({ ...form, username: e.target.value })}
+      />
+      <ProfileImageSettings
+        mediaUrl={form.mediaUrl}
+        originalMediaUrl={originalMediaUrl}
+        revertImage={() =>
+          setForm({ ...form, file: null, mediaUrl: originalMediaUrl })
+        }
+        onChangeHandler={(e) => {
+          const file = e.target.files[0];
+          const mediaUrl = URL.createObjectURL(file);
+          setForm({ ...form, file, mediaUrl });
+        }}
+      />
+      <DescriptionSettings
+        description={form.description}
+        onChangeHandler={(e) =>
+          setForm({ ...form, description: e.target.value })
+        }
+      />
+      <SubmitButton formChanged={formChanged} />
+    </form>
   );
 }
 
