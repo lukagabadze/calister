@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Route, NavLink } from "react-router-dom";
+import AccountSettings from "./accountSettings/AccountSettings";
 import ProfileSettings from "./profileSettings/ProfileSettings";
 
 function Settings() {
@@ -30,7 +31,7 @@ function Settings() {
               <ProfileSettings user={user} />
             </Route>
             <Route path="/settings/security" exact>
-              Not yet...
+              <AccountSettings />
             </Route>
             <Route path="/settings/other" exact>
               Not yet...
