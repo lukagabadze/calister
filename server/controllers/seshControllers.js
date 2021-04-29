@@ -25,12 +25,26 @@ const add = async (req, res) => {
   }
 };
 
+const seshesAll = async (req, res) => {
+  try {
+    const seshes = await Sesh.find({})
+      .sort([["date", -1]])
+      .populate("author")
+      .populate("comments.author");
+    return res.status(200).json({ seshes });
+  } catch (err) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 const seshes = async (req, res) => {
-  const seshes = await Sesh.find({})
+  const userId = req.params.id;
+  const user = await User.findById(userId);
+  const seshes = await Sesh.find({ author: { $in: user.following } })
     .sort([["date", -1]])
     .populate("author")
     .populate("comments.author");
-  return res.json({ seshes });
+  return res.status(200).json({ seshes });
 };
 
 const single = async (req, res) => {
@@ -80,4 +94,5 @@ module.exports = {
   single,
   comment_add,
   heart,
+  seshesAll,
 };

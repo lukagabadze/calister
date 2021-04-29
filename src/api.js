@@ -56,8 +56,8 @@ const api = {
   addSesh: (body) => {
     return axios.post(`${apiUrl}/sesh/add`, body);
   },
-  getSeshes: () => {
-    return axios.get(`${apiUrl}/sesh/seshes`);
+  getSeshes: (userId) => {
+    return axios.get(`${apiUrl}/sesh/seshes/${userId}`);
   },
 };
 
