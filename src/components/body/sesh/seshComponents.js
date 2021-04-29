@@ -56,10 +56,10 @@ export const Image = ({ media }) => {
   );
 };
 
-export const Logo = ({ mediaUrl = "default.jpg" }) => {
+export const Logo = ({ media = "default.jpg" }) => {
   return (
     <img
-      src={`http://localhost:4000/${mediaUrl}`}
+      src={`http://localhost:4000/${media}`}
       alt=""
       className="w-8 h-8 rounded-full"
     />

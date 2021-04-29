@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Logo } from "../seshComponents";
 
-function CommentAdd({ seshId, comments, setComments }) {
+function CommentAdd({ seshId, comments, setComments, media }) {
   const [commentForm, setCommentForm] = useState("");
 
   const commentFormSubmitHandler = async (e, comment) => {
@@ -28,7 +28,7 @@ function CommentAdd({ seshId, comments, setComments }) {
 
   return (
     <div className="flex items-center">
-      <Logo />
+      <Logo media={media} />
       <form onSubmit={commentFormSubmitHandler}>
         <input
           type="text"

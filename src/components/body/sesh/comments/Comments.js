@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import Comment from "./Comment";
 import CommentAdd from "./CommentAdd";
-import { Logo } from "../seshComponents";
 
 function Comments(props) {
   const { seshId } = props;
@@ -30,6 +28,7 @@ function Comments(props) {
           seshId={seshId}
           comments={comments}
           setComments={setComments}
+          media={user.media}
         />
       ) : null}
     </div>
