@@ -9,5 +9,6 @@ router.get("/seshes/:id", userControllers.seshes);
 
 router.post("/follow", checkAuth, userControllers.follow);
 router.post("/edit", checkAuth, upload.single("file"), userControllers.edit);
+router.post("/password", checkAuth, userControllers.password);
 
 module.exports = router;

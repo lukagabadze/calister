@@ -11,6 +11,7 @@ const initialErrors = {
   password1: "",
   password2: "",
 };
+const passwordMinLength = 6;
 
 function AccountSettings() {
   const [form, setForm] = useState(initialForm);
@@ -24,21 +25,26 @@ function AccountSettings() {
     if (password1 !== password2) {
       return setErrors({ password2: "Passwords must match" });
     }
-    if (password1 < 6) {
+    if (password1.length < passwordMinLength) {
       return setErrors({ password1: "Password too short" });
     }
     try {
-      await axios.post(`http://localhost:4000/user/password`);
+      await axios.post(`http://localhost:4000/user/password`, {
+        password1,
+        password2,
+      });
       setForm(initialForm);
       setErrors(initialErrors);
-      setStatus("Password successfully reset!");
+      setStatus("Password successfully changed!");
     } catch (err) {
-      return setStatus("Failed to reset password!");
+      return setStatus("Failed to change the password!");
     }
   };
 
   const formChanged =
-    form.password1 !== "" && form.password1 === form.password2;
+    form.password1 !== "" &&
+    form.password1 === form.password2 &&
+    form.password1.length >= passwordMinLength;
 
   return (
     <form className="flex flex-col space-y-6" onSubmit={formOnSubmitHandler}>

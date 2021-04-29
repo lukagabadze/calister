@@ -73,9 +73,30 @@ const edit = async (req, res) => {
   }
 };
 
+const password = async (req, res) => {
+  const { password1, password2 } = req.body;
+  if (!req.user) {
+    return res.status(401).json({ error: "You must be logged in" });
+  }
+  if (password1 !== password2) {
+    return res.status(403).json({ error: "Passwords must match" });
+  }
+
+  const userId = req.user._id;
+  try {
+    const user = await User.findById(userId);
+    user.password = password1;
+    await user.save();
+    return res.status(201).json({ message: "Password changed successfully" });
+  } catch (err) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 module.exports = {
   single,
   seshes,
   follow,
   edit,
+  password,
 };
