@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import useFetchSeshes from "../../../hooks/useFetchSeshes";
 import Sesh from "../sesh/Sesh";
+import Users from "../../users/Users";
 
 const defaultPage = 1;
 const size = 3;
@@ -46,9 +47,12 @@ function SeshList() {
   });
 
   return seshes.length === 0 && !loading ? (
-    <div className="text-2xl">Please follow some users</div>
+    <div className="w-full flex flex-col space-y-5">
+      <div className="text-2xl text-center">Please follow some users</div>
+      <Users />
+    </div>
   ) : (
-    <div className="flex flex-col space-y-5">
+    <div className="w-full flex flex-col space-y-5">
       {seshList}
       {loading ? <div className="text-center text-2xl">Loading...</div> : null}
     </div>

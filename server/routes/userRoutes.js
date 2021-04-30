@@ -4,6 +4,7 @@ const checkAuth = require("../middleware/checkAuth");
 const upload = require("../middleware/diskStorage");
 const userControllers = require("../controllers/userControllers");
 
+router.get("/search", userControllers.search);
 router.get("/single/:id", userControllers.single);
 router.get("/seshes/:id", userControllers.seshes);
 

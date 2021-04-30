@@ -5,9 +5,20 @@ const single = async (req, res) => {
   const { id } = req.params;
   try {
     const user = await User.findById(id);
-    return res.json(user);
+    return res.status(200).json(user);
   } catch (err) {
-    console.log(err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const search = async (req, res) => {
+  try {
+    const { query } = req.query;
+    const regex = new RegExp(query, "i");
+    const users = await User.find({ username: regex });
+    return res.status(200).json({ users });
+  } catch (err) {
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -19,7 +30,7 @@ const seshes = async (req, res) => {
       .populate("comments.author");
     return res.json({ seshes });
   } catch (err) {
-    console.log(err);
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -46,7 +57,8 @@ const follow = async (req, res) => {
     await author.save();
     res.status(202).json({ followers: user.followers });
   } catch (err) {
-    console.log(err);
+    return res.status(500).json({ error: "Internal server error" });
+    s;
   }
 };
 
@@ -69,7 +81,7 @@ const edit = async (req, res) => {
     const savedUser = await user.save();
     return res.status(201).json(savedUser);
   } catch (err) {
-    console.log(err);
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -95,6 +107,7 @@ const password = async (req, res) => {
 
 module.exports = {
   single,
+  search,
   seshes,
   follow,
   edit,
