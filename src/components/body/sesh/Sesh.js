@@ -13,8 +13,8 @@ function Sesh({ sesh }) {
   }, [hearts]);
 
   return (
-    <div className="flex flex-col border-2 border-gray-500 bg-gray-200 rounded-lg">
-      <div className="flex justify-between space-x-2 border-b-2 border-black">
+    <div className="flex flex-col border-2 border-gray-500 bg-gray-200 rounded-lg w-full">
+      <div className="flex justify-between space-x-2 border-b-2 border-black w-full">
         <Title title={title} author={author} />
         <div className="flex-end">
           {user ? (
@@ -23,7 +23,7 @@ function Sesh({ sesh }) {
         </div>
       </div>
       <div className="flex">
-        <ul className="w-full space-y-3 p-2 list-disc list-inside">
+        <ul className="flex-grow truncate space-y-3 p-2 list-disc list-inside">
           <Sets sets={sets} />
         </ul>
         {media ? (

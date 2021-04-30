@@ -4,23 +4,23 @@ import { Link } from "react-router-dom";
 export const Title = ({ title, author = {} }) => {
   const { username, media } = author;
   return (
-    <div className="flex m-2">
-      <div>
+    <div className="w-full flex m-2 truncate">
+      <div className="flex-none">
         <Link to={`/profile/${author._id}`}>
           <img
-            className="w-14 h-14 rounded-full hover:opacity-70 transition duration-75"
+            className=" w-14 h-14 rounded-full hover:opacity-70 transition duration-75"
             src={`http://localhost:4000/${media}`}
             alt=""
           />
         </Link>
       </div>
-      <div>
+      <div className="w-full flex-grow truncate">
         <Link to={`/profile/${author._id}`}>
           <div className="text-sm underline hover:text-pink-700 transition duration-75">
             {username}
           </div>
         </Link>
-        <div className="text-xl">{title}</div>
+        <div className="text-xl truncate">{title}</div>
       </div>
     </div>
   );
