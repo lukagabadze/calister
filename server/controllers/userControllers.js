@@ -12,10 +12,17 @@ const single = async (req, res) => {
 };
 
 const search = async (req, res) => {
+  let { page, size } = req.query;
+  page = parseInt(page);
+  size = parseInt(size);
+
+  const limit = size;
+  const skip = (page - 1) * size;
+
   try {
     const { query } = req.query;
     const regex = new RegExp(query, "i");
-    const users = await User.find({ username: regex });
+    const users = await User.find({ username: regex }).limit(limit).skip(skip);
     return res.status(200).json({ users });
   } catch (err) {
     return res.status(500).json({ error: "Internal server error" });

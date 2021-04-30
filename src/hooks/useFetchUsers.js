@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function useFetchUsers(query) {
+export default function useFetchUsers(query, page, size) {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(false);
@@ -9,12 +9,13 @@ export default function useFetchUsers(query) {
   useEffect(async () => {
     setLoading(true);
     const res = await axios.get(
-      `http://localhost:4000/user/search/?query=${query}`
+      `http://localhost:4000/user/search/?query=${query}&page=${page}&size=${size}`
     );
-    setLoading(false);
     const fetchedUsers = res.data.users;
-    setUsers(fetchedUsers);
-  }, [query]);
+    setUsers([...users, ...fetchedUsers]);
+    setLoading(false);
+    setHasMore(fetchedUsers.length > 0);
+  }, [query, page]);
 
   return { users, loading, hasMore };
 }

@@ -1,15 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import useFetchUsers from "../../hooks/useFetchUsers";
 import User from "./User";
 
+const size = 3;
+
 function Users() {
-  const { users, loading, hasMore } = useFetchUsers("");
+  const [page, setPage] = useState(1);
+  const { users, loading, hasMore } = useFetchUsers("", page, size);
+
+  const observer = useRef();
+  const lastUserRef = useCallback((node) => {
+    if (loading) return;
+    if (observer.current) observer.current.disconnect();
+
+    observer.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && hasMore) {
+        setPage(page + 1);
+      }
+    });
+    if (node) observer.current.observe(node);
+  });
 
   return (
     <div className="flex flex-col bg-gray-200 border-2 border-gray-400 ">
-      {users.map((user) => {
-        // user.description = null;
-        return <User user={user} />;
+      {users.map((user, ind) => {
+        if (ind === users.length - 1) {
+          return (
+            <div key={user._id} ref={lastUserRef}>
+              <User user={user} />
+              {loading ? (
+                <div className="text-center text-2xl">Loading...</div>
+              ) : null}
+            </div>
+          );
+        }
+        return (
+          <div key={user._id}>
+            <User user={user} />
+          </div>
+        );
       })}
     </div>
   );
