@@ -2,11 +2,9 @@ import React, { useState, useRef, useCallback } from "react";
 import useFetchUsers from "../../hooks/useFetchUsers";
 import User from "./User";
 
-const size = 3;
-
-function Users() {
-  const [page, setPage] = useState(1);
-  const { users, loading, hasMore } = useFetchUsers("", page, size);
+function Users({ query = "" }) {
+  const [render, setRender] = useState(false);
+  const { users, loading, hasMore } = useFetchUsers(query, render, setRender);
 
   const observer = useRef();
   const lastUserRef = useCallback((node) => {
@@ -15,7 +13,7 @@ function Users() {
 
     observer.current = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && hasMore) {
-        setPage(page + 1);
+        setRender(!render);
       }
     });
     if (node) observer.current.observe(node);
@@ -28,15 +26,12 @@ function Users() {
           return (
             <div key={user._id} ref={lastUserRef}>
               <User user={user} />
-              {loading ? (
-                <div className="text-center text-2xl">Loading...</div>
-              ) : null}
             </div>
           );
         }
         return (
           <div key={user._id}>
-            <User user={user} />
+            <User user={user} query={query} />
           </div>
         );
       })}
