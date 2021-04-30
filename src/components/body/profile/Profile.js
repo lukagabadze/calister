@@ -36,7 +36,7 @@ function Profile() {
   }, [user, author]);
 
   return (
-    <div className="flex flex-col space-y-20">
+    <div className="w-full flex flex-col space-y-20">
       <div className="flex w-full bg-gray-100 rounded-2xl border-2 border-gray-200 p-2">
         <div className="flex space-x-6">
           <div className="flex-none">
