@@ -26,8 +26,17 @@ const add = async (req, res) => {
 };
 
 const seshesAll = async (req, res) => {
+  let { page, size } = req.query;
+  page = parseInt(page);
+  size = parseInt(size);
+
+  const limit = size;
+  const skip = (page - 1) * size;
+
   try {
     const seshes = await Sesh.find({})
+      .limit(limit)
+      .skip(skip)
       .sort([["date", -1]])
       .populate("author")
       .populate("comments.author");
@@ -38,13 +47,26 @@ const seshesAll = async (req, res) => {
 };
 
 const seshes = async (req, res) => {
+  let { page, size } = req.query;
+  page = parseInt(page);
+  size = parseInt(size);
+
+  const limit = size;
+  const skip = (page - 1) * size;
+
   const userId = req.params.id;
-  const user = await User.findById(userId);
-  const seshes = await Sesh.find({ author: { $in: user.following } })
-    .sort([["date", -1]])
-    .populate("author")
-    .populate("comments.author");
-  return res.status(200).json({ seshes });
+  try {
+    const user = await User.findById(userId);
+    const seshes = await Sesh.find({ author: { $in: user.following } })
+      .limit(limit)
+      .skip(skip)
+      .sort([["date", -1]])
+      .populate("author")
+      .populate("comments.author");
+    return res.status(200).json({ seshes });
+  } catch (err) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
 };
 
 const single = async (req, res) => {
