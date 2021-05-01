@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SearchLabel from "./SearchLabel";
 import Users from "../../users/Users";
+import CancelSearch from "./CancelSearch";
 
 function UserSearch() {
   const [query, setQuery] = useState("");
@@ -17,14 +18,24 @@ function UserSearch() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setUsersHidden(false)}
-          onBlur={() => setUsersHidden(true)}
-          className="flex-grow bg-gray-600 p-1 placeholder-gray-300"
+          className="flex-grow bg-gray-600 p-1 placeholder-gray-300 outline-none"
+        />
+        <CancelSearch
+          hidden={usersHidden}
+          onClickHandler={() => {
+            setQuery("");
+            setUsersHidden(true);
+          }}
         />
       </div>
       <div
         className={`w-full absolute h-60 overflow-y-auto border-2 border-black mt-1 bg-gray-400 ${
           usersHidden ? "hidden" : null
         }`}
+        onClick={() => {
+          setQuery("");
+          setUsersHidden(true);
+        }}
       >
         <Users query={query} />
       </div>
