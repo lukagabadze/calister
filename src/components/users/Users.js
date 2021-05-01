@@ -33,7 +33,7 @@ function Users({ query = "" }) {
         if (ind === users.length - 1) {
           return (
             <div key={user._id} ref={lastUserRef}>
-              <User user={user} />
+              <User user={user} query={query} />
             </div>
           );
         }
