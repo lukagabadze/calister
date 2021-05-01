@@ -14,7 +14,7 @@ function Sesh({ sesh }) {
 
   return (
     <div className="flex flex-col border-2 border-gray-500 bg-gray-200 rounded-lg w-full">
-      <div className="flex justify-between space-x-2 border-b-2 border-black w-full">
+      <div className="flex justify-between space-x-3 border-b-2 border-black w-full">
         <Title title={title} author={author} />
         <div className="flex-end">
           {user ? (
