@@ -1,10 +1,18 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import useFetchUsers from "../../hooks/useFetchUsers";
 import User from "./User";
 
+const size = 3;
+
 function Users({ query = "" }) {
-  const [render, setRender] = useState(false);
-  const { users, loading, hasMore } = useFetchUsers(query, render, setRender);
+  const [fetch, setFetch] = useState(false);
+  const [page, setPage] = useState(1);
+  const { users, loading, hasMore } = useFetchUsers(query, page, size, fetch);
+
+  useEffect(() => {
+    setPage(1);
+    setFetch(!fetch);
+  }, [query]);
 
   const observer = useRef();
   const lastUserRef = useCallback((node) => {
@@ -13,7 +21,7 @@ function Users({ query = "" }) {
 
     observer.current = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && hasMore) {
-        setRender(!render);
+        setPage(page + 1);
       }
     });
     if (node) observer.current.observe(node);
