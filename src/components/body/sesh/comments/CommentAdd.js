@@ -28,14 +28,16 @@ function CommentAdd({ seshId, comments, setComments, media }) {
 
   return (
     <div className="flex items-center">
-      <Logo media={media} />
+      <div className="flex-none">
+        <Logo media={media} />
+      </div>
       <form onSubmit={commentFormSubmitHandler}>
         <input
           type="text"
           placeholder="Comment..."
           value={commentForm}
           onChange={(e) => setCommentForm(e.target.value)}
-          className="m-2 px-1 border-2 border-black rounded-md"
+          className="w-full m-2 mx-1 px-1 border-2 border-black rounded-md"
         />
       </form>
     </div>

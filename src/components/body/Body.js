@@ -10,7 +10,11 @@ function Body() {
     dispatch(fetchUser());
   }, []);
 
-  return <MainFeed />;
+  return (
+    <div className="p-2">
+      <MainFeed />
+    </div>
+  );
 }
 
 export default Body;

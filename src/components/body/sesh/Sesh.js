@@ -27,7 +27,7 @@ function Sesh({ sesh }) {
           <Sets sets={sets} />
         </ul>
         {media ? (
-          <div className="flex-none w-3/12 flex items-center border-l-2 border-black  bg-gray-200">
+          <div className="flex-none w-4/12 flex items-center border-l-2 border-black  bg-gray-200">
             <Image media={media} />
           </div>
         ) : null}

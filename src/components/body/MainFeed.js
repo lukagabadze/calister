@@ -10,7 +10,7 @@ function MainFeed() {
   const [seshes, setSeshes] = useState([]);
 
   return (
-    <div className="w-7/12 flex flex-col items-center justify-center m-auto space-y-5 mt-5">
+    <div className="lg:w-7/12 flex flex-col items-center justify-center m-auto space-y-5 mt-5">
       <Switch>
         <Route path="/" exact>
           <AddSesh seshes={seshes} setSeshes={setSeshes} />

@@ -34,7 +34,9 @@ function User({ user, query = "" }) {
           </div>
           <div className="flex flex-col space-y-3 truncate">
             <div>
-              <p className="text-base">{usernameHandler(username, query)}</p>
+              <div className="text-base">
+                {usernameHandler(username, query)}
+              </div>
               <p className="text-sm">Followers: {followers.length}</p>
             </div>
             <p className="truncate">{description}</p>

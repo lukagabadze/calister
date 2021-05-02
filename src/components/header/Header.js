@@ -5,14 +5,14 @@ import UserSearch from "./userSearch/UserSearch";
 
 function Header() {
   return (
-    <header className="flex justify-between items-center bg-gray-600 sticky top-0 px-10 p-4">
+    <header className="px-5 lg:px-20 py-2 flex justify-between items-center space-x-4 bg-gray-600 sticky top-0">
       <Link to="/">
-        <p className="text-white text-5xl">Calister</p>
+        <p className="text-white text-3xl sm:text-5xl">Calister</p>
       </Link>
-      <div className="w-5/12">
+      <div className="w-5/12 hidden sm:block">
         <UserSearch />
       </div>
-      <div className="flex-none">
+      <div className="flex-none text-sm">
         <Auth />
       </div>
     </header>

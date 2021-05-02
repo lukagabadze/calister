@@ -2,7 +2,7 @@ import React from "react";
 
 function SearchLabel() {
   return (
-    <label className="flex-none" htmlFor="search">
+    <label htmlFor="search">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-8 w-8"
