@@ -7,7 +7,7 @@ function UsernameSettings({ username, setFormHandler }) {
       <input
         id="username"
         type="text"
-        className="border-2 border-black rounded-sm"
+        className="border-2 border-black rounded-sm w-full truncate"
         placeholder="Username..."
         value={username}
         onChange={(e) => setFormHandler(e)}

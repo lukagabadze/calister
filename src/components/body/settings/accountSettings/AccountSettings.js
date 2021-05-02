@@ -55,7 +55,7 @@ function AccountSettings() {
           <input
             type="password"
             id="password1"
-            className="border-2 border-black rounded-sm"
+            className="border-2 border-black rounded-sm w-full truncate"
             value={form.password1}
             onChange={(e) => setForm({ ...form, password1: e.target.value })}
           />
@@ -66,7 +66,7 @@ function AccountSettings() {
           <input
             type="password"
             id="password1"
-            className="border-2 border-black rounded-sm"
+            className="border-2 border-black rounded-sm w-full truncate"
             value={form.password2}
             onChange={(e) => setForm({ ...form, password2: e.target.value })}
           />

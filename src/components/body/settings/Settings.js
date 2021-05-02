@@ -12,7 +12,7 @@ function Settings() {
 
   return (
     <div className="bg-gray-100 w-full flex border-2 border-gray-300 rounded-md">
-      <div className="bg-gray-200 flex flex-col w-1/5 text-center">
+      <div className="text-sm sm:text-base bg-gray-200 flex flex-col w-1/5 text-center">
         <NavLink to="/settings/profile" activeClassName={activeClass}>
           Profile
         </NavLink>
@@ -24,7 +24,7 @@ function Settings() {
         </NavLink>
       </div>
 
-      <div className="p-2">
+      <div className="text-sm sm:text-base p-2">
         {user ? (
           <div>
             <Route path="/settings/profile" exact>
