@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useSelector } from "react-redux";
 import useFetchSeshes from "../../../hooks/useFetchSeshes";
 import Sesh from "../sesh/Sesh";
 import Users from "../../users/Users";
@@ -7,8 +8,16 @@ const defaultPage = 1;
 const size = 3;
 
 function SeshList() {
+  const user = useSelector((state) => state.user);
   const [page, setPage] = useState(defaultPage);
-  const { seshes, loading, hasMore } = useFetchSeshes(page, setPage, size);
+  const [fetch, setFetch] = useState(false);
+  const { seshes, loading, hasMore } = useFetchSeshes(page, size, fetch);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setPage(1);
+    setFetch(!fetch);
+  }, [user]);
 
   const observer = useRef();
   const lastSeshRef = useCallback((node) => {

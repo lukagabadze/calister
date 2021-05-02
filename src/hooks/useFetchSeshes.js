@@ -2,19 +2,11 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import api from "../api";
 
-export default function useFetchSeshes(page, setPage, size) {
+export default function useFetchSeshes(page, size, fetch) {
   const user = useSelector((state) => state.user);
   const [seshes, setSeshes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(false);
-  const [render, setRender] = useState(false);
-
-  useEffect(async () => {
-    window.scrollTo(0, 0);
-    setSeshes([]);
-    setPage(1);
-    setRender(!render);
-  }, [user]);
 
   useEffect(async () => {
     setLoading(true);
@@ -22,8 +14,8 @@ export default function useFetchSeshes(page, setPage, size) {
     const fetchedSeshes = res.data.seshes;
     setLoading(false);
     setHasMore(fetchedSeshes.length > 0);
-    setSeshes([...seshes, ...fetchedSeshes]);
-  }, [page, render]);
+    setSeshes(page === 1 ? fetchedSeshes : [...seshes, ...fetchedSeshes]);
+  }, [page, fetch]);
 
   return { seshes, loading, hasMore };
 }
