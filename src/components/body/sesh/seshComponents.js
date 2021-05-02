@@ -1,6 +1,8 @@
 import api from "../../../api";
 import { Link } from "react-router-dom";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export const Title = ({ title, author = {} }) => {
   const { username, media } = author;
   return (
@@ -9,7 +11,7 @@ export const Title = ({ title, author = {} }) => {
         <Link to={`/profile/${author._id}`}>
           <img
             className="w-14 h-14 object-cover rounded-full hover:opacity-70 transition duration-75"
-            src={`http://localhost:4000/${media}`}
+            src={`${apiUrl}/${media}`}
             alt=""
           />
         </Link>
@@ -50,7 +52,7 @@ export const Image = ({ media }) => {
     <div className="m-2">
       <img
         className="rounded-xl border-2 border-gray-600"
-        src={`http://localhost:4000/${media}`}
+        src={`${apiUrl}/${media}`}
       />
     </div>
   );
@@ -60,7 +62,7 @@ export const Logo = ({ media = "default.jpg" }) => {
   return (
     <div className="w-10 h-10">
       <img
-        src={`http://localhost:4000/${media}`}
+        src={`${apiUrl}/${media}`}
         alt=""
         className="object-cover w-full h-full rounded-xl border-2 border-black"
       />

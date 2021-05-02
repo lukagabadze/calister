@@ -4,7 +4,7 @@ function ProfileImage({ mediaUrl }) {
   return (
     <img
       className="object-cover rounded-full border border-black"
-      src={`http://localhost:4000/${mediaUrl}`}
+      src={`${process.env.REACT_APP_API_URL}/${mediaUrl}`}
       alt=""
     />
   );

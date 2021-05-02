@@ -7,6 +7,8 @@ import ProfileImageSettings from "./ProfileImageSettings";
 import DescriptionSettings from "./DescriptionSettings";
 import SubmitButton from "../SubmitButton";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 const initialForm = {
   username: "",
   file: null,
@@ -25,12 +27,12 @@ function ProfileSettings(props) {
     }
     setForm({
       username: user.username,
-      mediaUrl: `http://localhost:4000/${user.media}`,
+      mediaUrl: `${apiUrl}/${user.media}`,
       description: user.description,
     });
   }, [user]);
 
-  const originalMediaUrl = user ? `http://localhost:4000/${user.media}` : null;
+  const originalMediaUrl = user ? `${apiUrl}/${user.media}` : null;
   const formChanged =
     user &&
     user.username === form.username &&
@@ -55,7 +57,7 @@ function ProfileSettings(props) {
         username: newUser.username,
         file: null,
         description: newUser.description,
-        mediaUrl: `http://localhost:4000/${newUser.media}`,
+        mediaUrl: `${apiUrl}/${newUser.media}`,
       });
       dispatch(fetchUser());
     });
