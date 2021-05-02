@@ -4,7 +4,7 @@ import User from "./User";
 
 const size = 3;
 
-function Users({ query = "" }) {
+function Users({ query = "", descriptionHidden }) {
   const [fetch, setFetch] = useState(false);
   const [page, setPage] = useState(1);
   const { users, loading, hasMore } = useFetchUsers(query, page, size, fetch);
@@ -39,7 +39,11 @@ function Users({ query = "" }) {
         }
         return (
           <div key={user._id}>
-            <User user={user} query={query} />
+            <User
+              user={user}
+              query={query}
+              descriptionHidden={descriptionHidden}
+            />
           </div>
         );
       })}

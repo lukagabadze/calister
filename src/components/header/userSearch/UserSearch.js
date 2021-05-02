@@ -41,7 +41,7 @@ function UserSearch() {
           setUsersHidden(true);
         }}
       >
-        <Users query={query} />
+        <Users query={query} descriptionHidden={true} />
       </div>
     </div>
   );
