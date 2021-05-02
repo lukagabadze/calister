@@ -13,7 +13,7 @@ function User({ user, query = "", descriptionHidden = false }) {
     const end = username.slice(ind + query.length, username.length);
 
     return (
-      <p>
+      <p className="truncate">
         {start}
         {match}
         {end}

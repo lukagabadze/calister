@@ -33,7 +33,11 @@ function Users({ query = "", descriptionHidden }) {
         if (ind === users.length - 1) {
           return (
             <div key={user._id} ref={lastUserRef}>
-              <User user={user} query={query} />
+              <User
+                user={user}
+                query={query}
+                descriptionHidden={descriptionHidden}
+              />
             </div>
           );
         }
