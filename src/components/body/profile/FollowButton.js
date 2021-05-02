@@ -1,19 +1,13 @@
 import React from "react";
-import axios from "axios";
+import api from "../../../api";
 
 function FollowButton({ followed, user, setUser }) {
   const userId = user._id;
-  const followButtonHandler = async (userId) => {
-    try {
-      const body = {
-        userId,
-      };
-      const res = await axios.post("http://localhost:4000/user/follow", body);
+  const followButtonHandler = (userId) => {
+    api.follow(userId).then((res) => {
       const followers = res.data.followers;
       setUser({ ...user, followers });
-    } catch (err) {
-      console.log(err);
-    }
+    });
   };
 
   const followedStyle = !followed

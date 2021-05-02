@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../../../../api";
 import SubmitButton from "../SubmitButton";
 import Error from "../Error";
 
@@ -18,7 +18,7 @@ function AccountSettings() {
   const [errors, setErrors] = useState(initialErrors);
   const [status, setStatus] = useState("");
 
-  const formOnSubmitHandler = async (e) => {
+  const formOnSubmitHandler = (e) => {
     e.preventDefault();
     setErrors(initialErrors);
     const { password1, password2 } = form;
@@ -28,17 +28,17 @@ function AccountSettings() {
     if (password1.length < passwordMinLength) {
       return setErrors({ password1: "Password too short" });
     }
-    try {
-      await axios.post(`http://localhost:4000/user/password`, {
-        password1,
-        password2,
+
+    api
+      .resetPassword(password1, password2)
+      .then((res) => {
+        setForm(initialForm);
+        setErrors(initialErrors);
+        setStatus("Password successfully changed!");
+      })
+      .catch((err) => {
+        return setStatus("Failed to change the password!");
       });
-      setForm(initialForm);
-      setErrors(initialErrors);
-      setStatus("Password successfully changed!");
-    } catch (err) {
-      return setStatus("Failed to change the password!");
-    }
   };
 
   const formChanged =

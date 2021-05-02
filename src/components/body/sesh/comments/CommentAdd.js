@@ -1,29 +1,19 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../../../../api";
 import { Logo } from "../seshComponents";
 
 function CommentAdd({ seshId, comments, setComments, media }) {
   const [commentForm, setCommentForm] = useState("");
 
-  const commentFormSubmitHandler = async (e, comment) => {
+  const commentFormSubmitHandler = (e) => {
     e.preventDefault();
-    try {
-      const body = {
-        seshId,
-        text: commentForm,
-      };
-      const res = await axios.post(
-        "http://localhost:4000/sesh/comment-add",
-        body
-      );
+    api.addComment(seshId, commentForm).then((res) => {
       const newComment = res.data;
       let commentsTmp = [...comments];
       commentsTmp.push(newComment);
       setComments(commentsTmp);
       setCommentForm("");
-    } catch (err) {
-      console.log(err);
-    }
+    });
   };
 
   return (

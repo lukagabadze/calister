@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../../../api";
 import { Link } from "react-router-dom";
 
 export const Title = ({ title, author = {} }) => {
@@ -71,9 +71,7 @@ export const Logo = ({ media = "default.jpg" }) => {
 export const Heart = ({ seshId, hearted, setHearted }) => {
   const heartOnClickHandler = async () => {
     setHearted(!hearted);
-    await axios.post("http://localhost:4000/sesh/heart", {
-      seshId,
-    });
+    api.heart(seshId);
   };
 
   return (

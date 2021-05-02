@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../../../api";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import FollowButton from "./FollowButton";
@@ -15,16 +15,11 @@ function Profile() {
   const [user, setUser] = useState({});
   const [followed, setFollowed] = useState(false);
 
-  useEffect(async () => {
-    try {
-      const userRes = await axios.get(
-        `http://localhost:4000/user/single/${userId}`
-      );
-      const fetchedUser = userRes.data;
+  useEffect(() => {
+    api.getSingleUser(userId).then((res) => {
+      const fetchedUser = res.data;
       setUser(fetchedUser);
-    } catch (err) {
-      console.log(err);
-    }
+    });
   }, [userId]);
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../../../../api";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "../../../../redux/index";
 import UsernameSettings from "./UsernameSettings";
@@ -39,17 +39,17 @@ function ProfileSettings(props) {
       ? false
       : true;
 
-  const formSubmitHandler = async (e) => {
+  const formSubmitHandler = (e) => {
     e.preventDefault();
     if (!formChanged) return;
 
     const { username, file, description } = form;
-    const data = new FormData();
-    data.append("username", username);
-    data.append("file", file);
-    data.append("description", description);
-    try {
-      const res = await axios.post(`http://localhost:4000/user/edit`, data);
+    const body = new FormData();
+    body.append("username", username);
+    body.append("file", file);
+    body.append("description", description);
+
+    api.editProfile(body).then((res) => {
       const newUser = res.data;
       setForm({
         username: newUser.username,
@@ -58,9 +58,7 @@ function ProfileSettings(props) {
         mediaUrl: `http://localhost:4000/${newUser.media}`,
       });
       dispatch(fetchUser());
-    } catch (err) {
-      console.log(err);
-    }
+    });
   };
 
   return (

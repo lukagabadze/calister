@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
-const size = 3;
+import api from "../api";
 
 export default function useFetchUsers(query, page, size, fetch) {
   const [users, setUsers] = useState([]);
@@ -11,11 +10,10 @@ export default function useFetchUsers(query, page, size, fetch) {
   useEffect(() => {
     let cancel;
     setLoading(true);
-    axios
-      .get(
-        `http://localhost:4000/user/search/?query=${query}&page=${page}&size=${size}`,
-        { cancelToken: new axios.CancelToken((c) => (cancel = c)) }
-      )
+
+    const body = { cancelToken: new axios.CancelToken((c) => (cancel = c)) };
+    api
+      .getUsers(query, page, size, body)
       .then((res) => {
         const fetchedUsers = res.data.users;
         setUsers(page === 1 ? fetchedUsers : [...users, ...fetchedUsers]);

@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiUrl = "http://localhost:4000";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 // append auth token to every requests header
 axios.interceptors.request.use(
@@ -60,6 +60,41 @@ const api = {
     return axios.get(
       `${apiUrl}/sesh/seshes/${userId}?page=${page}&size=${size}`
     );
+  },
+  getUsers: (query, page, size, body) => {
+    return axios.get(
+      `${apiUrl}/user/search/?query=${query}&page=${page}&size=${size}`,
+      body
+    );
+  },
+  getSingleUser: (userId) => {
+    return axios.get(`${apiUrl}/user/single/${userId}`);
+  },
+  follow: (userId) => {
+    return axios.post(`${apiUrl}/user/follow`, { userId });
+  },
+  getProfileSeshes: (userId) => {
+    return axios.get(`${apiUrl}/user/seshes/${userId}`);
+  },
+  resetPassword: (password1, password2) => {
+    return axios.post(`${apiUrl}/user/password`, {
+      password1,
+      password2,
+    });
+  },
+  editProfile: (body) => {
+    return axios.post(`${apiUrl}/user/edit`, body);
+  },
+  getSingleSesh: (seshId) => {
+    return axios.get(`${apiUrl}/sesh/single/${seshId}`);
+  },
+  heart: (seshId) => {
+    return axios.post(`${apiUrl}/sesh/heart`, {
+      seshId,
+    });
+  },
+  addComment: (seshId, text) => {
+    return axios.post(`${apiUrl}/sesh/comment-add`, { seshId, text });
   },
 };
 
