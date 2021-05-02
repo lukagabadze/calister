@@ -37,7 +37,7 @@ function Profile() {
 
   return (
     <div className="w-full flex flex-col space-y-20">
-      <div className="flex w-full bg-gray-100 rounded-2xl border-2 border-gray-200 p-2">
+      <div className="flex flex-col space-y-2 w-full bg-gray-100 rounded-2xl border-2 border-gray-200 p-2">
         <div className="flex space-x-6">
           <div className="flex-none">
             <ProfileImage mediaUrl={user.media} />
@@ -46,8 +46,13 @@ function Profile() {
             <Username username={user.username} />
             <Followers followers={user.followers} following={user.following} />
             <FollowButton followed={followed} user={user} setUser={setUser} />
-            <Description description={user.description} />
+            <div className="hidden sm:block">
+              <Description description={user.description} />
+            </div>
           </div>
+        </div>
+        <div className="block sm:hidden">
+          <Description description={user.description} />
         </div>
       </div>
       <ProfileSeshes />
