@@ -5,11 +5,17 @@ function User({ user, query = "", descriptionHidden = false }) {
   const { _id, username, media, description, followers } = user;
 
   const usernameHandler = (username, query) => {
-    const ind = username.indexOf(query);
+    const lowerUsername = username.toLowerCase();
+    const lowerQuery = query.toLowerCase();
+    const ind = lowerUsername.indexOf(lowerQuery);
     if (ind === -1) return username;
 
     const start = username.slice(0, ind);
-    const match = <span className="text-red-400">{query}</span>;
+    const match = (
+      <span className="text-red-400">
+        {username.slice(ind, ind + query.length)}
+      </span>
+    );
     const end = username.slice(ind + query.length, username.length);
 
     return (
