@@ -37,16 +37,18 @@ function Profile() {
 
   return (
     <div className="w-full flex flex-col space-y-20">
-      <div className="flex flex-col space-y-2 w-full bg-gray-100 rounded-2xl border-2 border-gray-200 p-2">
-        <div className="flex space-x-6">
-          <div className="flex-none">
+      <div className="flex flex-col space-y-4 w-full bg-gray-100 rounded-2xl border-2 border-gray-200 p-2">
+        <div className="flex space-x-5">
+          <div className="w-5/12 sm:w-4/12 flex-none">
             <ProfileImage mediaUrl={user.media} />
           </div>
           <div className="flex flex-col space-y-3">
-            <Username username={user.username} />
+            <div className="flex-none">
+              <Username username={user.username} />
+            </div>
             <Followers followers={user.followers} following={user.following} />
             <FollowButton followed={followed} user={user} setUser={setUser} />
-            <div className="hidden sm:block">
+            <div className="h-full hidden sm:block">
               <Description description={user.description} />
             </div>
           </div>
