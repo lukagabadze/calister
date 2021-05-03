@@ -4,6 +4,7 @@ import Title from "./Title";
 import SetList from "./SetList";
 import Image from "./Image";
 import Submit from "./Submit";
+import Sesh from "../sesh/Sesh";
 
 const initialForm = {
   title: "",
@@ -20,10 +21,11 @@ const initialErrors = {
   ],
 };
 
-function AddSesh(props) {
+function AddSesh() {
   const [form, setForm] = useState(initialForm);
   const [fileUrl, setFileUrl] = useState("");
   const [errors, setErrors] = useState(initialErrors);
+  const [addedSesh, setAddedSesh] = useState(null);
 
   const errorHandler = ({ title, sets }) => {
     let errorsTmp = null;
@@ -49,6 +51,8 @@ function AddSesh(props) {
     return errorsTmp;
   };
 
+  let addedSeshJSX = !addedSesh ? null : <Sesh sesh={addedSesh} />;
+
   const formOnSubmitHandler = async (e) => {
     e.preventDefault();
     setErrors(initialErrors);
@@ -64,59 +68,56 @@ function AddSesh(props) {
     data.append("sets", JSON.stringify(form.sets));
     data.append("file", form.file);
 
-    try {
-      const res = await api.addSesh(data);
-      console.log("Sesh added successfully");
-
-      const sesh = res.data;
-      setForm(initialForm);
-      setFileUrl("");
-      props.setSeshes([sesh, ...props.seshes]);
-    } catch (err) {
-      console.log(err);
-    }
+    const res = await api.addSesh(data);
+    const sesh = res.data;
+    setForm(initialForm);
+    setFileUrl("");
+    setAddedSesh(sesh);
   };
 
   return (
-    <div className="w-full bg-gray-100 text-black rounded-lg border-2 border-gray-300">
-      <form onSubmit={formOnSubmitHandler}>
-        <Title
-          value={form.title}
-          onChangeHandler={(e) => setForm({ ...form, title: e.target.value })}
-          error={errors.title}
-        />
-        <div className="flex flex-row">
-          <SetList
-            sets={form.sets}
-            errors={errors.sets}
-            onChangeHandler={(setIndex, value) => {
-              const sets = [...form.sets];
-              sets[setIndex] = value;
-              setForm({ ...form, sets });
-            }}
-            addSeshHandler={() => {
-              if (form.sets.length >= 15) return;
-              setForm({ ...form, sets: [...form.sets, ""] });
-            }}
-            delSeshHandler={() => {
-              let sets = form.sets;
-              if (sets.length <= 1) return;
-              sets.pop();
-              setForm({ ...form, sets: sets });
-            }}
+    <div className="w-full flex flex-col space-y-5">
+      <div className="w-full bg-gray-100 text-black rounded-lg border-2 border-gray-300">
+        <form onSubmit={formOnSubmitHandler}>
+          <Title
+            value={form.title}
+            onChangeHandler={(e) => setForm({ ...form, title: e.target.value })}
+            error={errors.title}
           />
-          <Image
-            onChangeHandler={(e) => {
-              const file = e.target.files[0];
-              const fileUrl = URL.createObjectURL(file);
-              setFileUrl(fileUrl);
-              setForm({ ...form, file });
-            }}
-            fileUrl={fileUrl}
-          />
-        </div>
-        <Submit />
-      </form>
+          <div className="flex flex-row">
+            <SetList
+              sets={form.sets}
+              errors={errors.sets}
+              onChangeHandler={(setIndex, value) => {
+                const sets = [...form.sets];
+                sets[setIndex] = value;
+                setForm({ ...form, sets });
+              }}
+              addSeshHandler={() => {
+                if (form.sets.length >= 15) return;
+                setForm({ ...form, sets: [...form.sets, ""] });
+              }}
+              delSeshHandler={() => {
+                let sets = form.sets;
+                if (sets.length <= 1) return;
+                sets.pop();
+                setForm({ ...form, sets: sets });
+              }}
+            />
+            <Image
+              onChangeHandler={(e) => {
+                const file = e.target.files[0];
+                const fileUrl = URL.createObjectURL(file);
+                setFileUrl(fileUrl);
+                setForm({ ...form, file });
+              }}
+              fileUrl={fileUrl}
+            />
+          </div>
+          <Submit />
+        </form>
+      </div>
+      {addedSeshJSX}
     </div>
   );
 }
