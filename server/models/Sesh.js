@@ -15,7 +15,7 @@ const seshSchema = new mongoose.Schema({
   media: String,
   date: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
   private: {
     type: Boolean,
