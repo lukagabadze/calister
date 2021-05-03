@@ -8,7 +8,7 @@ function UserSearch() {
   const [usersHidden, setUsersHidden] = useState(true);
 
   return (
-    <div className="text-white relative">
+    <div className=" relative">
       <div className="flex space-x-3 items-center border-b-2 border-white">
         <div className="flex-none">
           <SearchLabel />
@@ -20,7 +20,7 @@ function UserSearch() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setUsersHidden(false)}
-          className="w-full truncate bg-gray-600 p-1 placeholder-gray-300 outline-none"
+          className="w-full truncate bg-transparent p-1 placeholder-gray-400 outline-none"
         />
         <div className="flex-none">
           <CancelSearch
