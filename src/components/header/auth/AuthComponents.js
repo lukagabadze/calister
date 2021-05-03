@@ -29,7 +29,7 @@ export const Input = (props) => {
 
 export const Card = (props) => {
   return (
-    <div className=" absolute z-10 flex flex-col justify-start space-y-2 p-2 my-2 border-4 border-blue-400 bg-gray-100 shadow-lg">
+    <div className="absolute right-5 z-10 flex flex-col justify-start space-y-2 p-2 my-2 border-4 border-blue-400 bg-gray-100 shadow-lg">
       {props.children}
     </div>
   );

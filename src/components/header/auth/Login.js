@@ -33,6 +33,7 @@ function Login(props) {
         }}
       >
         <Card>
+          <p className="text-xl font-bold">Login</p>
           <Input
             placeholder="Username"
             type="text"
@@ -42,7 +43,6 @@ function Login(props) {
             value={form.username}
           />
           <Error error={errors.username} />
-
           <Input
             placeholder="Password"
             type="password"
@@ -52,7 +52,6 @@ function Login(props) {
             value={form.password}
           />
           <Error error={errors.password} />
-
           <Button type="submit">Submit</Button>
         </Card>
       </form>

@@ -42,6 +42,7 @@ function Signup(props) {
         }}
       >
         <Card>
+          <p className="text-xl font-bold">Signup</p>
           <Input
             placeholder="Username"
             type="text"
