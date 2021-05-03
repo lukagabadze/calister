@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import api from "../../../api";
 import Title from "./Title";
 import SetList from "./SetList";
@@ -22,6 +23,7 @@ const initialErrors = {
 };
 
 function AddSesh() {
+  const user = useSelector((state) => state.user);
   const [form, setForm] = useState(initialForm);
   const [fileUrl, setFileUrl] = useState("");
   const [errors, setErrors] = useState(initialErrors);
@@ -29,6 +31,11 @@ function AddSesh() {
 
   const errorHandler = ({ title, sets }) => {
     let errorsTmp = null;
+    //user error handler
+    if (!user) {
+      errorsTmp = { title: "You must be logged in" };
+    }
+
     // title error handler
     if (!title) {
       errorsTmp = { title: "Title is required" };
