@@ -5,7 +5,7 @@ import UserSearch from "./userSearch/UserSearch";
 
 function Header() {
   return (
-    <header className="z-50 px-5 lg:px-20 py-2 flex justify-between items-center space-x-4 bg-gray-600 sticky top-0">
+    <header className="z-10 px-5 sticky top-0 lg:px-20 py-2 flex justify-between items-center space-x-4 bg-gray-600">
       <Link to="/">
         <p className="text-white text-3xl sm:text-4xl md:text-5xl">Calister</p>
       </Link>

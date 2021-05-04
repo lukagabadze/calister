@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Comments from "./comments/Comments";
-import { Title, Sets, Image, Heart } from "./seshComponents";
+import { Title, Sets, Image, Heart, ImagePreview } from "./seshComponents";
 
 function Sesh({ sesh }) {
   const { _id, title, sets, media, comments, hearts, author } = sesh;
   const user = useSelector((state) => state.user);
   const [hearted, setHearted] = useState(false);
+  const [imageHidden, setImageHidden] = useState(true);
 
   useEffect(() => {
     setHearted(user ? hearts.indexOf(user._id) !== -1 : false);
@@ -28,7 +29,19 @@ function Sesh({ sesh }) {
         </ul>
         {media ? (
           <div className="flex-none w-4/12 flex items-center border-l-2 border-black  bg-gray-200">
-            <Image media={media} />
+            <div
+              className="m-2 rounded-xl cursor-pointer hover:opacity-60"
+              onClick={() => setImageHidden(false)}
+            >
+              <Image media={media} />
+            </div>
+            <div className="z-20">
+              <ImagePreview
+                media={media}
+                imageHidden={imageHidden}
+                setImageHidden={setImageHidden}
+              />
+            </div>
           </div>
         ) : null}
       </div>
