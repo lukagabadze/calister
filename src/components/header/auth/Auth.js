@@ -25,7 +25,9 @@ function Auth() {
         </div>
       ) : (
         <div className="flex items-center space-x-3">
-          <p className="text-lg text-white">Hello, {user.username}</p>
+          <p className="text-sm  xs:text-lg text-white">
+            Hello, {user.username}
+          </p>
           <SettingsLink />
           <Logout />
         </div>

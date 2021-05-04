@@ -5,7 +5,7 @@ export const Button = (props) => {
   return (
     <button
       className={
-        "border-2 hover:text-white bg-blue-100 hover:bg-blue-400 focus:outline-none  duration-100 rounded-sm px-4 py-1 " +
+        "text-xs px-2 xs:text-base xs:px-3 py-1 border-2 hover:text-white bg-blue-100 hover:bg-blue-400 focus:outline-none  duration-100 rounded-sm " +
         (props.active ? "bg-blue-400 border-black" : "border-blue-400")
       }
       onClick={props.onClickHandler}
@@ -29,7 +29,7 @@ export const Input = (props) => {
 
 export const Card = (props) => {
   return (
-    <div className="absolute right-5 z-10 flex flex-col justify-start space-y-2 p-2 my-2 border-4 border-blue-400 bg-gray-100 shadow-lg">
+    <div className="absolute right-0 w-full xxs:right-5 xxs:w-80 z-10 flex flex-col justify-start space-y-2 p-2 my-2 border-4 border-blue-400 bg-gray-100 shadow-lg">
       {props.children}
     </div>
   );
@@ -48,7 +48,7 @@ export function SettingsLink() {
         fill="none"
         viewBox="0 0 24 24"
         stroke="white"
-        className="w-9 h-9 hover:fill-current hover:text-gray-300"
+        className="w-6 xs:w-8 hover:fill-current hover:text-gray-300"
       >
         <path
           strokeLinecap="round"
