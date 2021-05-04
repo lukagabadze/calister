@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import api from "../../../api";
 import Title from "./Title";
@@ -28,6 +28,10 @@ function AddSesh() {
   const [fileUrl, setFileUrl] = useState("");
   const [errors, setErrors] = useState(initialErrors);
   const [addedSesh, setAddedSesh] = useState(null);
+
+  useEffect(() => {
+    setAddedSesh(null);
+  }, [user]);
 
   const errorHandler = ({ title, sets }) => {
     let errorsTmp = null;
