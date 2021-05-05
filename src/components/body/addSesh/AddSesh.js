@@ -4,6 +4,7 @@ import api from "../../../api";
 import Title from "./Title";
 import SetList from "./SetList";
 import Image from "./Image";
+import { CancelImage } from "./addSeshComponents";
 import Submit from "./Submit";
 import Sesh from "../sesh/Sesh";
 
@@ -115,15 +116,25 @@ function AddSesh() {
                 setForm({ ...form, sets: sets });
               }}
             />
-            <Image
-              onChangeHandler={(e) => {
-                const file = e.target.files[0];
-                const fileUrl = URL.createObjectURL(file);
-                setFileUrl(fileUrl);
-                setForm({ ...form, file });
-              }}
-              fileUrl={fileUrl}
-            />
+            <div className="relative">
+              {form.file ? (
+                <CancelImage
+                  onClickHandler={() => {
+                    setForm({ ...form, file: null });
+                    setFileUrl("");
+                  }}
+                />
+              ) : null}
+              <Image
+                onChangeHandler={(e) => {
+                  const file = e.target.files[0];
+                  const fileUrl = URL.createObjectURL(file);
+                  setFileUrl(fileUrl);
+                  setForm({ ...form, file });
+                }}
+                fileUrl={fileUrl}
+              />
+            </div>
           </div>
           <Submit />
         </form>
