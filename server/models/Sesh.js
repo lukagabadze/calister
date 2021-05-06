@@ -12,7 +12,10 @@ const seshSchema = new mongoose.Schema({
       required: true,
     },
   ],
-  media: String,
+  media: {
+    type: String,
+    default: null,
+  },
   date: {
     type: Date,
     default: Date.now,

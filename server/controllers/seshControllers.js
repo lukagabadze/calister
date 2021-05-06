@@ -1,27 +1,29 @@
 const Sesh = require("../models/Sesh");
 const User = require("../models/User");
+const { uploadFile } = require("../s3");
 
 const add = async (req, res) => {
-  const changeFilePath = (filePath) => {
-    filePath = filePath.split("/");
-    filePath[0] = null;
-    return (filePath = filePath.join("/"));
-  };
-
   const { title, sets } = req.body;
   const file = req.file;
+
   try {
     const setsArray = JSON.parse(sets);
     const author = await User.findById(req.user._id);
     const sesh = await new Sesh({
       title,
       sets: setsArray,
-      media: file ? changeFilePath(file.path) : null,
       author: author,
-    }).save();
-    res.json(sesh);
+    });
+
+    if (file) {
+      await uploadFile(file);
+      sesh.media = file.filename;
+    }
+
+    await sesh.save();
+    return res.status(201).json(sesh);
   } catch (err) {
-    res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
 

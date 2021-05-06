@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const Sesh = require("../models/Sesh");
+const { uploadFile } = require("../s3");
 
 const single = async (req, res) => {
   const { id } = req.params;
@@ -70,20 +71,18 @@ const follow = async (req, res) => {
 };
 
 const edit = async (req, res) => {
-  const changeFilePath = (filePath) => {
-    filePath = filePath.split("/");
-    filePath[0] = null;
-    return (filePath = filePath.join("/"));
-  };
-
   const userId = req.user._id;
   const { username, description } = req.body;
   const file = req.file;
   try {
     const user = await User.findById(userId);
     user.username = username ? username : user.username;
-    user.media = file ? changeFilePath(file.path) : user.media;
     user.description = description ? description : user.description;
+
+    if (file) {
+      await uploadFile(file);
+      user.media = file.filename;
+    }
 
     const savedUser = await user.save();
     return res.status(201).json(savedUser);
