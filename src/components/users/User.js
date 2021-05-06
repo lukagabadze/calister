@@ -33,7 +33,7 @@ function User({ user, query = "", descriptionHidden = false }) {
         <div className="flex space-x-3">
           <div className="flex-none flex w-2/12 h-auto">
             <img
-              src={`${process.env.REACT_APP_API_URL}/${media}`}
+              src={`${process.env.REACT_APP_API_URL}/image/${media}`}
               alt=""
               className="object-cover w-full border border-black rounded-md"
             />

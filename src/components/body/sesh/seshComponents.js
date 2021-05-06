@@ -11,7 +11,7 @@ export const Title = ({ title, author = {} }) => {
         <Link to={`/profile/${author._id}`}>
           <img
             className="w-14 h-14 object-cover rounded-full hover:opacity-70 transition duration-75"
-            src={`${apiUrl}/${media}`}
+            src={`${apiUrl}/image/${media}`}
             alt=""
           />
         </Link>
@@ -51,7 +51,7 @@ export const Image = ({ media }) => {
   return (
     <img
       className="rounded-xl border-2 border-gray-600"
-      src={`${apiUrl}/${media}`}
+      src={`${apiUrl}/image/${media}`}
     />
   );
 };
@@ -60,7 +60,7 @@ export const Logo = ({ media = "default.jpg" }) => {
   return (
     <div className="w-10 h-10">
       <img
-        src={`${apiUrl}/${media}`}
+        src={`${apiUrl}/image/${media}`}
         alt=""
         className="object-cover w-full h-full rounded-xl border-2 border-black"
       />

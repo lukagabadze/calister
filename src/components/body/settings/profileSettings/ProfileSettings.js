@@ -27,12 +27,12 @@ function ProfileSettings(props) {
     }
     setForm({
       username: user.username,
-      mediaUrl: `${apiUrl}/${user.media}`,
+      mediaUrl: `${apiUrl}/image/${user.media}`,
       description: user.description,
     });
   }, [user]);
 
-  const originalMediaUrl = user ? `${apiUrl}/${user.media}` : null;
+  const originalMediaUrl = user ? `${apiUrl}/image/${user.media}` : null;
   const formChanged =
     user &&
     user.username === form.username &&
@@ -57,7 +57,7 @@ function ProfileSettings(props) {
         username: newUser.username,
         file: null,
         description: newUser.description,
-        mediaUrl: `${apiUrl}/${newUser.media}`,
+        mediaUrl: `${apiUrl}/image/${newUser.media}`,
       });
       dispatch(fetchUser());
     });
