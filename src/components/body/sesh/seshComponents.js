@@ -106,7 +106,7 @@ export const ImagePreview = ({ media, imageHidden, setImageHidden }) => {
       <div className="absolute h-full w-full left-0 top-0 p-2">
         <img
           className="object-scale-down h-full mx-auto"
-          src={`${process.env.REACT_APP_API_URL}/${media}`}
+          src={`${process.env.REACT_APP_API_URL}/image/${media}`}
           alt=""
         />
         <svg
