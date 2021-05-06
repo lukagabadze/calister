@@ -8,6 +8,7 @@ const authMiddleware = require("./middleware/authMiddleware");
 const authRoutes = require("./routes/authRoutes");
 const seshRoutes = require("./routes/seshRoutes");
 const userRoutes = require("./routes/userRoutes");
+const { getFileStream } = require("./s3");
 
 mongoose.set("useCreateIndex", true);
 mongoose.connect(
@@ -31,3 +32,9 @@ app.use(authMiddleware);
 app.use("/auth", authRoutes);
 app.use("/sesh", seshRoutes);
 app.use("/user", userRoutes);
+app.use("/image/:key", (req, res) => {
+  const key = req.params.key;
+  const readStream = getFileStream(key);
+
+  return readStream.pipe(res);
+});
