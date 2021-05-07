@@ -6,7 +6,6 @@ function ProfileImageSettings({
   revertImage,
   onChangeHandler,
 }) {
-  console.log(mediaUrl, originalMediaUrl);
   return (
     <div className="flex flex-col">
       <p className="mb-2 border-b-2 border-black">Profile picture:</p>

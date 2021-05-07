@@ -1,6 +1,6 @@
 import React from "react";
 
-function ProfileImage({ mediaUrl }) {
+function ProfileImage({ mediaUrl = "default.jpg" }) {
   return (
     <img
       className="object-cover rounded-full border border-black"
