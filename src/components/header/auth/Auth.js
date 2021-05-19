@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Login from "./Login";
 import Signup from "./Signup";
 import Logout from "./Logout";
@@ -25,8 +26,13 @@ function Auth() {
         </div>
       ) : (
         <div className="flex items-center space-x-3">
-          <p className="text-sm  xs:text-lg text-white">
-            Hello, {user.username}
+          <p className="flex text-sm  xs:text-lg text-white">
+            Hello,
+            <Link to={`/profile/${user._id}`}>
+              <p className="mx-1 px-1 rounded-md hover:bg-white hover:text-black cursor-pointer">
+                {user.username}
+              </p>
+            </Link>
           </p>
           <SettingsLink />
           <Logout />
