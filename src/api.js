@@ -57,6 +57,8 @@ const api = {
     return axios.post(`${apiUrl}/sesh/add`, body);
   },
   getSeshes: (userId, page, size) => {
+    console.log("IM BACK BITCHEEEEEEEEEEEEEEES");
+    console.log(apiUrl);
     return axios.get(
       `${apiUrl}/sesh/seshes/${userId}?page=${page}&size=${size}`
     );
@@ -95,6 +97,9 @@ const api = {
   },
   addComment: (seshId, text) => {
     return axios.post(`${apiUrl}/sesh/comment-add`, { seshId, text });
+  },
+  deleteSesh: (seshId) => {
+    return axios.delete(`${apiUrl}/sesh/delete`, { seshId });
   },
 };
 

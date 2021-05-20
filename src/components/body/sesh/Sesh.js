@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Comments from "./comments/Comments";
-import { Title, Sets, Image, Heart, ImagePreview } from "./seshComponents";
+import {
+  Title,
+  Sets,
+  Image,
+  Heart,
+  ImagePreview,
+  DeleteSesh,
+} from "./seshComponents";
+import api from "../../../api";
 
 function Sesh({ sesh }) {
   const { _id, title, sets, media, comments, hearts, author } = sesh;
@@ -13,6 +21,8 @@ function Sesh({ sesh }) {
     setHearted(user ? hearts.indexOf(user._id) !== -1 : false);
   }, [hearts]);
 
+  const handleOnDelete = () => {};
+
   return (
     <div className="flex flex-col border-2 border-gray-500 bg-gray-200 rounded-lg w-full">
       <div className="flex justify-between space-x-3 border-b-2 border-black w-full">
@@ -22,6 +32,7 @@ function Sesh({ sesh }) {
             <Heart seshId={_id} hearted={hearted} setHearted={setHearted} />
           ) : null}
         </div>
+        {_id === user._id && <DeleteSesh onClick={handleOnDelete} />}
       </div>
       <div className="flex">
         <ul className="flex-grow truncate space-y-3 p-2 list-disc list-inside">
