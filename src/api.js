@@ -57,8 +57,6 @@ const api = {
     return axios.post(`${apiUrl}/sesh/add`, body);
   },
   getSeshes: (userId, page, size) => {
-    console.log("IM BACK BITCHEEEEEEEEEEEEEEES");
-    console.log(apiUrl);
     return axios.get(
       `${apiUrl}/sesh/seshes/${userId}?page=${page}&size=${size}`
     );
